@@ -1,3 +1,4 @@
 {
-  "extends": "next/core-web-vitals"
+    "extends": "next/core-web-vitals",
+    "plugins": ["react-hooks", "jsx-a11y", "react, import"]
 }
