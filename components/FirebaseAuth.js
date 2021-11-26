@@ -16,6 +16,9 @@ const firebaseAuthConfig = {
             provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
             requireDisplayName: false,
         },
+        {
+            provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        },
     ],
     signInSuccessUrl: "/",
     credentialHelper: "none",
