@@ -1,5 +1,5 @@
 import React from "react";
-import { withAuthUser, AuthAction } from "next-firebase-auth";
+import Layout from "../components/Layout";
 import FirebaseAuth from "../components/FirebaseAuth";
 
 const styles = {
@@ -13,20 +13,12 @@ const styles = {
     },
 };
 
-const Auth = () => (
-    <div style={styles.content}>
-        <h3>Sign in</h3>
-        <div style={styles.textContainer}>
+export default function Auth() {
+    return (
+        <Layout pageHeader={"Sign In / Register"}>
             <p>Login or make an account!</p>
-        </div>
-        <div>
-            <FirebaseAuth />
-        </div>
-    </div>
-);
 
-export default withAuthUser({
-    whenAuthed: AuthAction.REDIRECT_TO_APP,
-    whenUnauthedBeforeInit: AuthAction.RETURN_NULL,
-    whenUnauthedAfterInit: AuthAction.RENDER,
-})(Auth);
+            <FirebaseAuth />
+        </Layout>
+    );
+}
