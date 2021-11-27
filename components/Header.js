@@ -8,7 +8,6 @@ import Hamburger from "hamburger-react";
 export default function Header() {
     const auth = getAuth();
     const [user, loading, error] = useAuthState(auth);
-    console.log(user);
     const [isOpen, setOpen] = useState(false);
     return (
         <>
@@ -38,7 +37,7 @@ export default function Header() {
                         <>
                             <Link href="/select-team">
                                 <a className={styles.link}>
-                                    <span>View Team</span>
+                                    <span>Your Team</span>
                                 </a>
                             </Link>
                             <a
@@ -51,6 +50,27 @@ export default function Header() {
                             </a>
                         </>
                     )}
+                    <h5 className={styles.leaderboard}>Leaderboards</h5>
+                    <Link href="/team-leaderboard">
+                        <a className={styles.link}>
+                            <span>Teams</span>
+                        </a>
+                    </Link>
+                    <Link href="/player-leaderboard">
+                        <a className={styles.link}>
+                            <span>Players</span>
+                        </a>
+                    </Link>
+                    <Link href="/skater-leaderboard">
+                        <a className={styles.link}>
+                            <span>Skaters</span>
+                        </a>
+                    </Link>
+                    <Link href="/goalie-leaderboard">
+                        <a className={styles.link}>
+                            <span>Goalies</span>
+                        </a>
+                    </Link>
                 </div>
             )}
         </>

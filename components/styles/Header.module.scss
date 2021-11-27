@@ -2,54 +2,59 @@ $main-header: #7ce7ff;
 $main-header-highlight: #b0eefc;
 
 .container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0.25rem 1.25rem;
-    background-color: $main-header;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.25rem 1.25rem;
+  background-color: $main-header;
 }
 
 .titleContainer {
-    // margin-left: 1rem;
-    margin-right: auto;
+  // margin-left: 1rem;
+  margin-right: auto;
 }
 
 .buttons {
-    margin: 0 1em;
-    cursor: pointer;
+  margin: 0 1em;
+  cursor: pointer;
+}
+
+.leaderboard {
+  margin-top: 1rem;
+  margin-bottom: 0.1rem;
 }
 
 .link {
-    color: black;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    text-align: right;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
 
-    &:hover {
-        background-color: $main-header-highlight;
-        padding-right: 0.25em;
-        color: #000;
-        text-shadow: 0.15em 0.15em #fff;
-    }
+  &:hover {
+    background-color: $main-header-highlight;
+    padding-right: 0.25em;
+    color: #000;
+    text-shadow: 0.15em 0.15em #fff;
+  }
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .hr {
-    margin-bottom: 0.5rem;
-    height: 0.1em;
-    width: 100%;
-    background-color: black;
+  margin-bottom: 0.5rem;
+  height: 0.1em;
+  width: 100%;
+  background-color: black;
 }
 
 .dropdown {
-    background-color: $main-header;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 0.25rem 1.25rem;
+  background-color: $main-header;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.25rem 1.25rem;
 }
