@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import init from "../utils/init";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 init();
 
