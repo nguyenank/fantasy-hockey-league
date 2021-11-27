@@ -2,39 +2,16 @@ import dotenv from "dotenv/config.js";
 import fs from "fs";
 import papa from "papaparse";
 import _ from "lodash";
-import { initializeApp } from "firebase/app";
-import {
-    getFirestore,
-    writeBatch,
-    doc,
-    collection,
-    query,
-    where,
-    getDocs,
-} from "firebase/firestore";
+import { default as Firestore } from "@google-cloud/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
-// Firebase config
-const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.FIREBASE_APP_ID,
-    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-};
-
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = isSupported()
-    .then(result => {
-        if (result) getAnalytics(app);
-    })
-    .catch(e => console.log("error initializing analytics"));
 
-const db = getFirestore();
+const firestore = new Firestore({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+});
 
 function playerDB(file_path) {
     //  pull information from spreadsheet about players
@@ -112,11 +89,10 @@ function playerStats(file_path) {
             skipEmptyLines: true,
             complete: results => {
                 async function transformData(result) {
-                    const q = query(
-                        collection(db, "leagues/phf2122/players"),
-                        where("name", "==", result.name)
-                    );
-                    const querySnapshot = await getDocs(q);
+                    const q = firestore
+                        .collection("leagues/phf2122/players")
+                        .where("name", "==", result.name);
+                    const querySnapshot = await q.get();
                     if (querySnapshot.size !== 1) {
                         throw `not enough/too many players with same name: ${result.name}`;
                     }
@@ -136,11 +112,11 @@ function playerStats(file_path) {
 async function initializePlayers(
     file_path = "./db/spreadsheets/phf_21-22.csv"
 ) {
-    const batch = writeBatch(db);
+    const batch = firestore.writeBatch();
     const players = await playerDB(file_path);
     _.forEach(players, player => {
         batch.set(
-            doc(db, `leagues/phf2122/players/${player.playerId}`),
+            firestore.doc(`leagues/phf2122/players/${player.playerId}`),
             player
         );
     });
@@ -153,7 +129,7 @@ async function updateSkaterStats(
     skater_file = "./db/spreadsheets/skater_stats-11-23-21.csv",
     goalie_file = "./db/spreadsheets/goalie_stats-11-23-21.csv"
 ) {
-    const batch = writeBatch(db);
+    const batch = firestore.batch();
     const skaters = await playerStats(skater_file);
     _.forEach(skaters, s => {
         const points =
@@ -165,7 +141,7 @@ async function updateSkaterStats(
             0.12 * s.pend +
             0.12 * s.bks +
             s.hattys;
-        batch.update(doc(db, `leagues/phf2122/players/${s.playerId}`), {
+        batch.update(firestore.doc(`leagues/phf2122/players/${s.playerId}`), {
             stats: _.omit(s, ["name", "playerId"]),
             points: points,
         });
@@ -182,7 +158,7 @@ async function updateSkaterStats(
             0.9 * g.a1 +
             0.66 * g.a2 +
             g.ps_sv;
-        batch.update(doc(db, `leagues/phf2122/players/${g.playerId}`), {
+        batch.update(firestore.doc(`leagues/phf2122/players/${g.playerId}`), {
             stats: _.omit(g, ["name", "playerId"]),
             points: points,
         });
@@ -193,4 +169,7 @@ async function updateSkaterStats(
 }
 
 // initializePlayers();
-updateSkaterStats();
+updateSkaterStats(
+    "./db/spreadsheets/skater_stats-11-26-21.csv",
+    "./db/spreadsheets/goalie_stats-11-26-21.csv"
+);
