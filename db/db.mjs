@@ -17,7 +17,7 @@ function playerDB(file_path) {
     //  pull information from spreadsheet about players
     const file = fs.createReadStream(file_path);
     const players = [];
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         papa.parse(file, {
             header: true,
             dynamicTyping: true,
@@ -29,7 +29,7 @@ function playerDB(file_path) {
                 (v === "" || v === "GOALIE")
                     ? 0
                     : v,
-            complete: results => {
+            complete: (results) => {
                 function transformData(result) {
                     const playerId = uuidv4();
                     const data = {
@@ -79,7 +79,7 @@ function playerDB(file_path) {
 function playerStats(file_path) {
     //  pull information from spreadsheet about player stats
     const file = fs.createReadStream(file_path);
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         papa.parse(file, {
             header: true,
             transform: (v, h) =>
@@ -87,7 +87,7 @@ function playerStats(file_path) {
                 v === "" ? 0 : v,
             dynamicTyping: true,
             skipEmptyLines: true,
-            complete: results => {
+            complete: (results) => {
                 async function transformData(result) {
                     const q = firestore
                         .collection("leagues/phf2122/players")
@@ -97,7 +97,7 @@ function playerStats(file_path) {
                         throw `not enough/too many players with same name: ${result.name}`;
                     }
                     let playerId;
-                    querySnapshot.forEach(doc => {
+                    querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
                         playerId = doc.id;
                     });
@@ -114,7 +114,7 @@ async function initializePlayers(
 ) {
     const batch = firestore.writeBatch();
     const players = await playerDB(file_path);
-    _.forEach(players, player => {
+    _.forEach(players, (player) => {
         batch.set(
             firestore.doc(`leagues/phf2122/players/${player.playerId}`),
             player
@@ -131,7 +131,7 @@ async function updateSkaterStats(
 ) {
     const batch = firestore.batch();
     const skaters = await playerStats(skater_file);
-    _.forEach(skaters, s => {
+    _.forEach(skaters, (s) => {
         const points =
             0.1 * s.sog +
             s.g +
@@ -148,7 +148,7 @@ async function updateSkaterStats(
     });
 
     const goalies = await playerStats(goalie_file);
-    _.forEach(goalies, g => {
+    _.forEach(goalies, (g) => {
         const points =
             0.25 * g.start +
             0.75 * g.w +

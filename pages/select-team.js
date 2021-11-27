@@ -36,7 +36,7 @@ export default function Demo({ players }) {
     return (
         <Layout pageHeader={"Select Team"}>
             {user ? (
-                players.map(p => <div>{p.name}</div>)
+                players.map(p => <div key={p.userId}>{p.name}</div>)
             ) : (
                 <div>You must be signed in to select a team!</div>
             )}

@@ -35,7 +35,7 @@ export async function getStaticProps() {
               );
 
     const playerQuerySnapshot = await getDocs(playerQuery);
-    playerQuerySnapshot.forEach(doc => {
+    playerQuerySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         players.push(doc.data());
     });
