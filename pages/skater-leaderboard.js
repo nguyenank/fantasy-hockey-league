@@ -20,12 +20,19 @@ export async function getStaticProps() {
     const db = getFirestore();
     let players = [];
 
-    const playerQuery = query(
-        collection(db, "leagues/phf2122/players"),
-        where("position", "in", ["F", "D", "F/D", "D/F"]),
-        orderBy("points", "desc"),
-        limit(25)
-    );
+    const playerQuery =
+        process.env.DATA_FULL === "true"
+            ? query(
+                  collection(db, "leagues/phf2122/players"),
+                  where("position", "in", ["F", "D", "F/D", "D/F"]),
+                  orderBy("points", "desc")
+              )
+            : query(
+                  collection(db, "leagues/phf2122/players"),
+                  where("position", "in", ["F", "D", "F/D", "D/F"]),
+                  orderBy("points", "desc"),
+                  limit(25)
+              );
 
     const playerQuerySnapshot = await getDocs(playerQuery);
     playerQuerySnapshot.forEach(doc => {

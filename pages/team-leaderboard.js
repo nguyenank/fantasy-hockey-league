@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import TeamTable from "../components/TeamTable";
+import BackToTop from "../components/BackToTop";
 import {
     collection,
     query,
@@ -44,6 +45,7 @@ export default function Demo({ teams }) {
             <div className="center">
                 <TeamTable teams={teams} />
             </div>
+            <BackToTop />
         </Layout>
     );
 }

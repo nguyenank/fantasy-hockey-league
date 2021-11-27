@@ -9,15 +9,12 @@ import {
     getDoc,
     orderBy,
 } from "firebase/firestore";
+import _ from "lodash";
 import styles from "./player.module.scss";
 
 export default function Player({ player }) {
     return (
         <Layout pageHeader={player.name}>
-            <div>
-                <span className={styles.bold}>{"Name: "}</span>
-                {player.name}
-            </div>
             <div>
                 <span className={styles.bold}>{"Age: "}</span>
                 {player.age}
@@ -35,6 +32,46 @@ export default function Player({ player }) {
                 {player.fantasy_value}
             </div>
             <div>
+                <span className={styles.bold}>
+                    {"Past Scoring Rates for Various Leagues"}
+                </span>
+            </div>
+            <ul className={styles.list}>
+                <li>
+                    <span className={styles.bold}>{"PHF: "}</span>
+                    {player.league_scoring_rates.phf}
+                </li>
+                <li>
+                    <span className={styles.bold}>{"NCAA: "}</span>
+                    {player.league_scoring_rates.ncaa}
+                </li>
+                <li>
+                    <span className={styles.bold}>{"U Sports: "}</span>
+                    {player.league_scoring_rates.usports}
+                </li>
+                <li>
+                    <span className={styles.bold}>{"NCAA DIII: "}</span>
+                    {player.league_scoring_rates.ncaa_dii}
+                </li>
+                <li>
+                    <span className={styles.bold}>{"SDHL: "}</span>
+                    {player.league_scoring_rates.sdhl}
+                </li>
+            </ul>
+            <div>
+                <span className={styles.bold}>{"Current Stats"}</span>
+            </div>
+            <ul className={styles.list}>
+                {_.map(player.stats, (value, stat) => (
+                    <li>
+                        <span className={styles.bold}>
+                            {_.toUpper(stat) + ": "}
+                        </span>
+                        {value}
+                    </li>
+                ))}
+            </ul>
+            <div>
                 <span className={styles.bold}>{"Points: "}</span>
                 {player.points}
             </div>
@@ -47,11 +84,17 @@ export async function getStaticPaths() {
     const db = getFirestore();
     let players = [];
 
-    const playerQuery = query(
-        collection(db, "leagues/phf2122/players"),
-        orderBy("points", "desc"),
-        limit(10)
-    );
+    const playerQuery =
+        process.env.DATA_FULL === "true"
+            ? query(
+                  collection(db, "leagues/phf2122/players"),
+                  orderBy("points", "desc")
+              )
+            : query(
+                  collection(db, "leagues/phf2122/players"),
+                  orderBy("points", "desc"),
+                  limit(25)
+              );
 
     const playerQuerySnapshot = await getDocs(playerQuery);
     playerQuerySnapshot.forEach(doc => {

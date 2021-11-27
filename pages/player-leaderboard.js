@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import PlayerTable from "../components/PlayerTable";
+import BackToTop from "../components/BackToTop";
 import {
     collection,
     query,
@@ -17,12 +18,17 @@ export async function getStaticProps() {
     // Call an external API endpoint to get posts
     const db = getFirestore();
     let players = [];
-
-    const playerQuery = query(
-        collection(db, "leagues/phf2122/players"),
-        orderBy("points", "desc"),
-        limit(25)
-    );
+    const playerQuery =
+        process.env.DATA_FULL === "true"
+            ? query(
+                  collection(db, "leagues/phf2122/players"),
+                  orderBy("points", "desc")
+              )
+            : query(
+                  collection(db, "leagues/phf2122/players"),
+                  orderBy("points", "desc"),
+                  limit(25)
+              );
 
     const playerQuerySnapshot = await getDocs(playerQuery);
     playerQuerySnapshot.forEach(doc => {
@@ -48,6 +54,7 @@ export default function Demo({ players }) {
             <div className="center">
                 <PlayerTable players={players} />
             </div>
+            <BackToTop />
         </Layout>
     );
 }
