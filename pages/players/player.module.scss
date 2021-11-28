@@ -17,3 +17,12 @@
   justify-content: flex-start;
   gap: 1.5em;
 }
+@media only screen and (max-width: 768px) {
+  .columns {
+    display: block;
+
+    .tableArea {
+      margin: 1rem;
+    }
+  }
+}
