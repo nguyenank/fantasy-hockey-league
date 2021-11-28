@@ -52,7 +52,13 @@ $light-grey: #eee;
     font-weight: 600;
   }
 }
-// .overflow {
-//   overflow-x: auto;
-//   position: relative;
-// }
+
+.overflow {
+  overflow-x: auto;
+  position: relative;
+}
+@media only screen and (min-width: 1024px) {
+  .overflow {
+    overflow-x: unset;
+  }
+}
