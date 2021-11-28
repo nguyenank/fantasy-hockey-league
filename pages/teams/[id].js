@@ -92,6 +92,10 @@ export async function getStaticProps({ params }) {
             skaters.push({ ...data, ...data.stats });
         });
     }
+    skaters = _.map(skaters, (player, index) => ({
+        ...player,
+        index: index + 1,
+    }));
 
     const goalies = _.remove(skaters, (s) => s.position === "G");
 

@@ -2,7 +2,18 @@
   font-weight: bold;
 }
 
+.bolder {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 .list {
   font-size: 0.95rem;
   list-style-type: square;
+}
+
+.columns {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5em;
 }

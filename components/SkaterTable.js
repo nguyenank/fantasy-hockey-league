@@ -1,7 +1,7 @@
 import Table from "./Table";
 import Link from "next/link";
 
-export default function SkaterTable({ players }) {
+export default function SkaterTable({ players, individual }) {
     const columns = [
         {
             Header: "#",
@@ -60,5 +60,10 @@ export default function SkaterTable({ players }) {
         },
     ];
 
-    return <Table data={players} columns={columns} />;
+    return (
+        <Table
+            data={players}
+            columns={individual ? columns.slice(3) : columns}
+        />
+    );
 }

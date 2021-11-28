@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import IndividualTable from "../../components/IndividualTable";
 import {
     collection,
     query,
@@ -13,71 +14,109 @@ import _ from "lodash";
 import styles from "./player.module.scss";
 
 export default function Player({ player }) {
+    const teamMap = {
+        TOR: "Toronto Six (TOR)",
+        CTW: "Connecticut Whale (CTW)",
+        BOS: "Boston Pride (BOS)",
+        MIN: "Minnesota Whitecaps (MIN)",
+        MET: "Metropolitan Riveters (MET)",
+        BUF: "Buffalo Beauts (BUF)",
+    };
     return (
         <Layout pageHeader={player ? player.name : "Player Not Found"}>
             {player ? (
-                <>
+                <div className={styles.columns}>
+                    {" "}
                     <div>
-                        <span className={styles.bold}>{"Age: "}</span>
-                        {player.age}
+                        <div>
+                            <span className={styles.bold}>{"Age: "}</span>
+                            {player.age}
+                        </div>
+                        <div>
+                            <span className={styles.bold}>{"Position: "}</span>
+                            {player.position}
+                        </div>
+                        <div>
+                            <span className={styles.bold}>{"Team: "}</span>
+                            {teamMap[player.team]}
+                        </div>
+                        <div>
+                            <span className={styles.bold}>
+                                {"Fantasy Value: "}
+                            </span>
+                            {player.fantasy_value}
+                        </div>
+
+                        {player.position !== "G" && (
+                            <>
+                                <div>
+                                    <span className={styles.bold}>
+                                        {
+                                            "Past Scoring Rates for Various Leagues"
+                                        }
+                                    </span>
+                                </div>
+                                <ul className={styles.list}>
+                                    <li>
+                                        <span className={styles.bold}>
+                                            {"PHF: "}
+                                        </span>
+                                        {player.league_scoring_rates.phf
+                                            ? player.league_scoring_rates.phf
+                                            : 0}
+                                    </li>
+                                    <li>
+                                        <span className={styles.bold}>
+                                            {"NCAA: "}
+                                        </span>
+                                        {player.league_scoring_rates.ncaa
+                                            ? player.league_scoring_rates.ncaa
+                                            : 0}
+                                    </li>
+                                    <li>
+                                        <span className={styles.bold}>
+                                            {"U Sports: "}
+                                        </span>
+                                        {player.league_scoring_rates.usports
+                                            ? player.league_scoring_rates
+                                                  .usports
+                                            : 0}
+                                    </li>
+                                    <li>
+                                        <span className={styles.bold}>
+                                            {"NCAA DIII: "}
+                                        </span>
+                                        {player.league_scoring_rates.ncaa_diii
+                                            ? player.league_scoring_rates
+                                                  .ncaa_diii
+                                            : 0}
+                                    </li>
+                                    <li>
+                                        <span className={styles.bold}>
+                                            {"SDHL: "}
+                                        </span>
+                                        {player.league_scoring_rates.sdhl
+                                            ? player.league_scoring_rates.sdhl
+                                            : 0}
+                                    </li>
+                                </ul>
+                            </>
+                        )}
                     </div>
                     <div>
-                        <span className={styles.bold}>{"Position: "}</span>
-                        {player.position}
+                        <div>
+                            <span className={styles.bolder}>
+                                {"Current Stats"}
+                            </span>
+                        </div>
+                        <IndividualTable
+                            data={{ ...player.stats, points: player.points }}
+                            position={
+                                player.position === "G" ? "goalie" : "skater"
+                            }
+                        />
                     </div>
-                    <div>
-                        <span className={styles.bold}>{"Team: "}</span>
-                        {player.team}
-                    </div>
-                    <div>
-                        <span className={styles.bold}>{"Fantasy Value: "}</span>
-                        {player.fantasy_value}
-                    </div>
-                    <div>
-                        <span className={styles.bold}>
-                            {"Past Scoring Rates for Various Leagues"}
-                        </span>
-                    </div>
-                    <ul className={styles.list}>
-                        <li>
-                            <span className={styles.bold}>{"PHF: "}</span>
-                            {player.league_scoring_rates.phf}
-                        </li>
-                        <li>
-                            <span className={styles.bold}>{"NCAA: "}</span>
-                            {player.league_scoring_rates.ncaa}
-                        </li>
-                        <li>
-                            <span className={styles.bold}>{"U Sports: "}</span>
-                            {player.league_scoring_rates.usports}
-                        </li>
-                        <li>
-                            <span className={styles.bold}>{"NCAA DIII: "}</span>
-                            {player.league_scoring_rates.ncaa_dii}
-                        </li>
-                        <li>
-                            <span className={styles.bold}>{"SDHL: "}</span>
-                            {player.league_scoring_rates.sdhl}
-                        </li>
-                    </ul>
-                    <div>
-                        <span className={styles.bold}>{"Current Stats"}</span>
-                    </div>
-                    <ul className={styles.list}>
-                        {_.map(player.stats, (value, stat) => (
-                            <li>
-                                <span className={styles.bold}>
-                                    {_.toUpper(stat) + ": "}
-                                </span>
-                                {value}
-                            </li>
-                        ))}
-                    </ul>
-                    <div>
-                        <span className={styles.bold}>{"Points: "}</span>
-                        {player.points.toFixed(2)}
-                    </div>
-                </>
+                </div>
             ) : (
                 <div>
                     Something went wrong! No player matching this ID could be

@@ -3,13 +3,37 @@ $main-header-highlight: #b0eefc;
 $light-grey: #eee;
 
 .tablestyle {
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 
   th {
     background-color: $main-header;
     padding: 0.25rem 1rem;
     position: sticky;
     top: 0;
+
+    &:hover {
+      background-color: $main-header-highlight;
+      color: #000;
+      text-shadow: 0.15em 0.15em #fff;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .noHover {
+    &:hover {
+      background-color: $main-header;
+      text-shadow: none;
+    }
   }
 
   tr {
@@ -22,5 +46,9 @@ $light-grey: #eee;
 
   tr:nth-child(even) {
     background-color: $light-grey;
+  }
+
+  .boldish {
+    font-weight: 600;
   }
 }

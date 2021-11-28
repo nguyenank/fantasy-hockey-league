@@ -1,5 +1,15 @@
+$main-header: #7ce7ff;
+$main-header-highlight: #b0eefc;
+$light-grey: #eee;
+
 .bold {
-  margin-bottom: 0.25rem;
+  margin-bottom: 1rem;
+  font-variant: small-caps;
+  font-feature-settings: normal;
+  font-size: 1.5rem;
+  background-color: $main-header;
+  border: 1px black solid;
+  padding: 0.25rem;
 }
 
 .divider {

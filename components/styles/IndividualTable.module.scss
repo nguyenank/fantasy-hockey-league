@@ -1,0 +1,29 @@
+$main-header: #7ce7ff;
+$main-header-highlight: #b0eefc;
+$light-grey: #eee;
+
+.tablestyle {
+  border: 1px solid black;
+
+  th {
+    background-color: $main-header;
+    padding: 0.25rem 1rem;
+    border-right: 1px solid black;
+  }
+
+  tr {
+    text-align: right;
+  }
+
+  td {
+    padding: 0.25rem 1rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: $light-grey;
+  }
+}
+
+.bold {
+  font-weight: 600;
+}
