@@ -21,14 +21,18 @@ export default function Team({ team, skaters, goalies }) {
         <Layout pageHeader={team ? team.teamName : "Team Not Found"}>
             {team ? (
                 <>
-                    <div className={"center"}>
+                    <div className={styles.blocks}>
+                        <h5
+                            className={styles.bold}
+                        >{`Rank: ${team.rankings.overall}/58`}</h5>
+
                         <h5
                             className={styles.bold}
                         >{`Points: ${team.points.toFixed(2)}`}</h5>
                     </div>
-                    <SkaterTable players={skaters} />
+                    <SkaterTable players={skaters} team={true} />
                     <div className={styles.divider}></div>
-                    <GoalieTable players={goalies} />
+                    <GoalieTable players={goalies} team={true} />
                     <BackToTop />
                 </>
             ) : (

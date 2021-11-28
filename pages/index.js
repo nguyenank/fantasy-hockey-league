@@ -42,12 +42,6 @@ export async function getStaticProps() {
         players.push(doc.data());
     });
 
-    teams = _.map(teams, (team, index) => ({ ...team, index: index + 1 }));
-    players = _.map(players, (player, index) => ({
-        ...player,
-        points: player.points.toFixed(2),
-        index: index + 1,
-    }));
     return {
         props: {
             teams,
@@ -69,7 +63,7 @@ export default function Index({ teams, players }) {
                 </div>
                 <div className={styles.tableArea}>
                     <h4>Top 10 Players</h4>
-                    <PlayerTable players={players} />
+                    <PlayerTable players={players} index={true} />
                     <div className={styles.links}>
                         <Link href="/player-leaderboard">
                             <a>View Player Leaderboard</a>

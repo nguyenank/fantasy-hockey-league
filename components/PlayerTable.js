@@ -1,11 +1,17 @@
 import Table from "./Table";
 import Link from "next/link";
+import { default as _ } from "lodash";
 
-export default function MyTable({ players }) {
+export default function MyTable({ players, index }) {
     const columns = [
         {
-            Header: "#",
-            accessor: "index",
+            Header: index ? "Rank" : "Rank (Overall)",
+            accessor: "rankings.overall",
+        },
+        {
+            Header: "Rank (Skaters / Goalies)",
+            accessor: (row) =>
+                row.rankings.skater ? row.rankings.skater : row.rankings.goalie,
         },
         {
             Header: "Player Name",
@@ -38,5 +44,10 @@ export default function MyTable({ players }) {
         },
     ];
 
-    return <Table data={players} columns={columns} />;
+    return (
+        <Table
+            data={players}
+            columns={index ? _.concat(columns[0], columns.slice(2)) : columns}
+        />
+    );
 }

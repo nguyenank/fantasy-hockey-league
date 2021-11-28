@@ -12,7 +12,6 @@ export default function Table({ data, position }) {
             ["pend", "Penalties Drawn"],
             ["bks", "Blocks"],
             ["hattys", "Hat Tricks"],
-            ["points", "Points"],
         ],
         goalie: [
             ["start", "Starts"],
@@ -23,7 +22,6 @@ export default function Table({ data, position }) {
             ["a1", "Primary Assists"],
             ["a2", "Secondary Assists"],
             ["ps_sv", "Penalty Shots Saved"],
-            ["points", "Points"],
         ],
     };
     return (

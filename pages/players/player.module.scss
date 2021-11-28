@@ -1,3 +1,7 @@
+$main-header: #7ce7ff;
+$main-header-highlight: #b0eefc;
+$light-grey: #eee;
+
 .bold {
   font-weight: bold;
 }
@@ -25,4 +29,24 @@
       margin: 1rem;
     }
   }
+}
+
+.blockText {
+  margin-bottom: 1rem;
+  font-variant: small-caps;
+  font-feature-settings: normal;
+  font-size: 1.5rem;
+  background-color: $main-header-highlight;
+  border: 1px black solid;
+  text-shadow: 0.1rem 0.1rem white;
+  padding: 0.25rem;
+}
+
+.divider {
+  height: 2rem;
+}
+
+.blocks {
+  display: flex;
+  gap: 1rem;
 }

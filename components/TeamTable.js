@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function MyTable({ teams }) {
     const columns = [
         {
-            Header: "#",
-            accessor: "index",
+            Header: "Rank",
+            accessor: "rankings.overall",
         },
         {
             Header: "Team Name",

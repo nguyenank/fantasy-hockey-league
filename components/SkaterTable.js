@@ -1,11 +1,11 @@
 import Table from "./Table";
 import Link from "next/link";
 
-export default function SkaterTable({ players, individual }) {
+export default function SkaterTable({ players, individual, team }) {
     const columns = [
         {
-            Header: "#",
-            accessor: "index",
+            Header: team ? "Rank (Overall)" : "Rank",
+            accessor: team ? "rankings.overall" : "rankings.skater",
         },
         {
             Header: "Name",
@@ -21,6 +21,10 @@ export default function SkaterTable({ players, individual }) {
         {
             Header: "Team",
             accessor: "team", // accessor is the "key" in the data
+        },
+        {
+            Header: "Position",
+            accessor: "position", // accessor is the "key" in the data
         },
         {
             Header: "Shots on Goal",
