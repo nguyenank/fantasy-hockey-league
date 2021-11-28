@@ -64,29 +64,23 @@ export default function Index({ teams, players }) {
                     <h4>Top 10 Teams</h4>
                     <TeamTable teams={teams} />
                     <Link href="/team-leaderboard">
-                        <a className={styles.links}>View Team Leaderboard</a>
+                        <a>View Team Leaderboard</a>
                     </Link>
                 </div>
                 <div className={styles.tableArea}>
                     <h4>Top 10 Players</h4>
                     <PlayerTable players={players} />
-                    <div>
+                    <div className={styles.links}>
                         <Link href="/player-leaderboard">
-                            <a className={styles.links}>
-                                View Player Leaderboard
-                            </a>
+                            <a>View Player Leaderboard</a>
                         </Link>
                         {" | "}
                         <Link href="/skater-leaderboard">
-                            <a className={styles.links}>
-                                View Skater Leaderboard
-                            </a>
+                            <a>View Skater Leaderboard</a>
                         </Link>
                         {" | "}
                         <Link href="/goalie-leaderboard">
-                            <a className={styles.links}>
-                                View Goalie Leaderboard
-                            </a>
+                            <a>View Goalie Leaderboard</a>
                         </Link>
                     </div>
                 </div>

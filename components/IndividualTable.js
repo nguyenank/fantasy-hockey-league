@@ -28,20 +28,22 @@ export default function Table({ data, position }) {
     };
     return (
         <table className={styles.tablestyle}>
-            {_.map(statMap[position], ([accessor, name]) => (
-                <tr key={accessor}>
-                    <th>{name}</th>
-                    <td
-                        className={
-                            accessor === "points" ? styles.bold : undefined
-                        }
-                    >
-                        {accessor === "points"
-                            ? data[accessor].toFixed(2)
-                            : data[accessor]}
-                    </td>
-                </tr>
-            ))}
+            <tbody>
+                {_.map(statMap[position], ([accessor, name]) => (
+                    <tr key={accessor}>
+                        <th>{name}</th>
+                        <td
+                            className={
+                                accessor === "points" ? styles.bold : undefined
+                            }
+                        >
+                            {accessor === "points"
+                                ? data[accessor].toFixed(2)
+                                : data[accessor]}
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
         </table>
     );
 }

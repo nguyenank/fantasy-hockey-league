@@ -19,10 +19,12 @@ export default function Header() {
                         </a>
                     </Link>
                 </div>
-                <div className={styles.bold}>
-                    {user ? user.email : "Not Signed In"}
+                <div className={styles.rightSide}>
+                    <div className={styles.bold}>
+                        {user ? user.email : "Not Signed In"}
+                    </div>
+                    <Hamburger toggled={isOpen} toggle={setOpen} />
                 </div>
-                <Hamburger toggled={isOpen} toggle={setOpen} />
             </div>
             {isOpen && (
                 <div className={styles.dropdown}>
