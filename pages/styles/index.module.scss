@@ -3,20 +3,21 @@
   justify-content: space-around;
   gap: 1.5em;
 }
-@media only screen and (max-width: 768px) {
-  .columns {
-    display: block;
-
-    .tableArea {
-      margin: 1rem;
-    }
-  }
-}
 
 .tableArea {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media only screen and (max-width: 768px) {
+  .columns {
+    display: block;
+
+    .tableArea {
+      margin: 1rem 0;
+      display: block;
+    }
+  }
 }
 
 .links {

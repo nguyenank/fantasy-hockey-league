@@ -8,6 +8,12 @@
   flex-grow: 1;
   padding: 2rem 4rem;
 }
+@media only screen and (max-width: 600px) {
+  .content {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
 
 .pageHeader {
   margin-bottom: 0.25rem;
