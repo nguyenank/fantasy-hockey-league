@@ -167,7 +167,7 @@ async function updateSkaterStats(
     await batch.commit();
     console.log("Players updated!");
 }
-
+// // add teams from JSON file
 async function addTeams(teams_json) {
     const data = JSON.parse(fs.readFileSync(teams_json));
     const batch = firestore.batch();
@@ -185,10 +185,19 @@ async function addTeams(teams_json) {
     await batch.commit();
     console.log("Teams added!");
 }
-async function generateTeams(teams) {
+async function generateTeams(teams, byName = false) {
     async function generateTeam(t) {
-        const players = await getPlayerInfo(t.players);
-        return { teamName: t.teamName, players: players };
+        let players;
+        if (byName) {
+            players = await getPlayerInfoByName(t.players);
+        } else {
+            players = await getPlayerInfoById(t.players);
+        }
+        return {
+            teamName: t.teamName,
+            userId: t.userId ? t.userId : undefined,
+            players: players,
+        };
     }
 
     return new Promise((resolve) => {
@@ -196,7 +205,7 @@ async function generateTeams(teams) {
     });
 }
 
-async function getPlayerInfo(team) {
+async function getPlayerInfoByName(team) {
     async function findPlayerId(player) {
         const q = firestore
             .collection("leagues/phf2122/players")
@@ -220,9 +229,87 @@ async function getPlayerInfo(team) {
     });
 }
 
+async function getPlayerInfoById(team) {
+    async function findPlayer(player) {
+        const q = firestore.doc(`leagues/phf2122/players/${player}`);
+        const doc = await q.get();
+        return doc.data();
+    }
+
+    return new Promise((resolve) => {
+        resolve(Promise.all(team.map((p) => findPlayer(p))));
+    });
+}
+
+// // update ranks and points
+async function updatePlayerRankings() {
+    // get teams
+    const q = firestore
+        .collection("leagues/phf2122/players")
+        .orderBy("points", "desc");
+    const querySnapshot = await q.get();
+    let skaters = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        skaters.push(doc.data());
+    });
+    // calculate rankings for position and overall
+    let goalies = _.remove(skaters, (p) => p.position === "G");
+    skaters = _.map(skaters, (s, i) => ({ ...s, rankings: { skater: i + 1 } }));
+    goalies = _.map(goalies, (g, i) => ({ ...g, rankings: { goalie: i + 1 } }));
+
+    let players = _.orderBy(_.concat(skaters, goalies), ["points"], ["desc"]);
+    players = _.map(players, (p, i) => ({
+        ...p,
+        rankings: { ...p.rankings, overall: i + 1 },
+    }));
+    // push back to firestore
+    const batch = firestore.batch();
+    _.forEach(players, (p) => {
+        batch.update(firestore.doc(`leagues/phf2122/players/${p.playerId}`), {
+            rankings: p.rankings,
+        });
+    });
+    await batch.commit();
+    console.log("Player Rankings Updated!");
+}
+async function updateTeamPointsAndRankings() {
+    // get teams
+    const q = firestore.collection("leagues/phf2122/teams");
+    const querySnapshot = await q.get();
+    let data = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        data.push(doc.data());
+    });
+    // get players for each team
+    let teams = await generateTeams(data);
+    // calculate points
+    teams = _.map(teams, (t) => ({
+        ...t,
+        points: _.sum(_.map(t.players, "points")),
+    }));
+    // calculate rankings
+    teams = _.orderBy(teams, ["points"], "desc");
+    teams = _.map(teams, (t, i) => ({ ...t, rankings: { overall: i + 1 } }));
+
+    // push back to firestore
+    const batch = firestore.batch();
+    _.forEach(teams, (t) => {
+        batch.update(firestore.doc(`leagues/phf2122/teams/${t.userId}`), {
+            points: t.points,
+            rankings: t.rankings,
+        });
+    });
+    await batch.commit();
+    console.log("Team Points & Rankings Updated!");
+}
+
 // initializePlayers();
 // addTeams("./db/phf_teams.json");
 // updateSkaterStats(
 //     "./db/spreadsheets/skater_stats-11-26-21.csv",
 //     "./db/spreadsheets/goalie_stats-11-26-21.csv"
 // );
+// updatePlayerRankings();
+updateTeamPointsAndRankings();
