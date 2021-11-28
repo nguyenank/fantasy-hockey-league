@@ -23,8 +23,13 @@ export default function MyTable({ players }) {
             accessor: "team", // accessor is the "key" in the data
         },
         {
+            Header: "Position",
+            accessor: "position",
+        },
+        {
             Header: "Points",
             accessor: "points",
+            Cell: ({ value }) => parseFloat(value).toFixed(2),
         },
         {
             Header: "Id",

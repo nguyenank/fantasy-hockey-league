@@ -51,6 +51,7 @@ export default function SkaterTable({ players }) {
         {
             Header: "Points",
             accessor: "points",
+            Cell: ({ value }) => parseFloat(value).toFixed(2),
         },
         {
             Header: "Id",

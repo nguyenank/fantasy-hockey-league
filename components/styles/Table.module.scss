@@ -8,6 +8,8 @@ $light-grey: #eee;
   th {
     background-color: $main-header;
     padding: 0.25rem 1rem;
+    position: sticky;
+    top: 0;
   }
 
   tr {

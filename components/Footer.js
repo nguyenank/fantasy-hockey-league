@@ -7,9 +7,14 @@ import styles from "./styles/Footer.module.scss";
 export default function Footer() {
     return (
         <div className={styles.footer}>
-            <hr />
-            This site was created by An Nguyen, based on the PHF 21-22 Fantasy
-            League run by the Ice Garden.
+            <hr className={styles.hr} />
+            This site was created by{" "}
+            <a href="https://twitter.com/nguyenank_">An Nguyen</a> using
+            Next.js, based on the{" "}
+            <a href="https://www.theicegarden.com/2021/11/4/22760382/the-ice-garden-fantasy-hockey-nwhl-phf-2021-22-womens-hockey">
+                PHF 2021-2022 Fantasy League
+            </a>{" "}
+            run by <a href="https://www.theicegarden.com/">The Ice Garden</a>.
         </div>
     );
 }

@@ -35,7 +35,7 @@ export default function Header() {
                         </Link>
                     ) : (
                         <>
-                            <Link href="/select-team">
+                            <Link href={`/teams/${user.uid}`}>
                                 <a className={styles.link}>
                                     <span>Your Team</span>
                                 </a>

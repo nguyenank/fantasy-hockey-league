@@ -19,13 +19,20 @@ export async function getStaticProps() {
     const db = getFirestore();
     let teams = [];
 
-    const teamQuery = query(
-        collection(db, "leagues/phf2122/teams"),
-        orderBy("points", "desc")
-    );
+    const teamQuery =
+        process.env.DATA_FULL === "true"
+            ? query(
+                  collection(db, "leagues/phf2122/teams"),
+                  orderBy("points", "desc")
+              )
+            : query(
+                  collection(db, "leagues/phf2122/teams"),
+                  orderBy("points", "desc"),
+                  limit(25)
+              );
 
     const teamQuerySnapshot = await getDocs(teamQuery);
-    teamQuerySnapshot.forEach(doc => {
+    teamQuerySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         teams.push(doc.data());
     });

@@ -14,67 +14,76 @@ import styles from "./player.module.scss";
 
 export default function Player({ player }) {
     return (
-        <Layout pageHeader={player.name}>
-            <div>
-                <span className={styles.bold}>{"Age: "}</span>
-                {player.age}
-            </div>
-            <div>
-                <span className={styles.bold}>{"Position: "}</span>
-                {player.position}
-            </div>
-            <div>
-                <span className={styles.bold}>{"Team: "}</span>
-                {player.team}
-            </div>
-            <div>
-                <span className={styles.bold}>{"Fantasy Value: "}</span>
-                {player.fantasy_value}
-            </div>
-            <div>
-                <span className={styles.bold}>
-                    {"Past Scoring Rates for Various Leagues"}
-                </span>
-            </div>
-            <ul className={styles.list}>
-                <li>
-                    <span className={styles.bold}>{"PHF: "}</span>
-                    {player.league_scoring_rates.phf}
-                </li>
-                <li>
-                    <span className={styles.bold}>{"NCAA: "}</span>
-                    {player.league_scoring_rates.ncaa}
-                </li>
-                <li>
-                    <span className={styles.bold}>{"U Sports: "}</span>
-                    {player.league_scoring_rates.usports}
-                </li>
-                <li>
-                    <span className={styles.bold}>{"NCAA DIII: "}</span>
-                    {player.league_scoring_rates.ncaa_dii}
-                </li>
-                <li>
-                    <span className={styles.bold}>{"SDHL: "}</span>
-                    {player.league_scoring_rates.sdhl}
-                </li>
-            </ul>
-            <div>
-                <span className={styles.bold}>{"Current Stats"}</span>
-            </div>
-            <ul className={styles.list}>
-                {_.map(player.stats, (value, stat) => (
-                    <li>
+        <Layout pageHeader={player ? player.name : "Player Not Found"}>
+            {player ? (
+                <>
+                    <div>
+                        <span className={styles.bold}>{"Age: "}</span>
+                        {player.age}
+                    </div>
+                    <div>
+                        <span className={styles.bold}>{"Position: "}</span>
+                        {player.position}
+                    </div>
+                    <div>
+                        <span className={styles.bold}>{"Team: "}</span>
+                        {player.team}
+                    </div>
+                    <div>
+                        <span className={styles.bold}>{"Fantasy Value: "}</span>
+                        {player.fantasy_value}
+                    </div>
+                    <div>
                         <span className={styles.bold}>
-                            {_.toUpper(stat) + ": "}
+                            {"Past Scoring Rates for Various Leagues"}
                         </span>
-                        {value}
-                    </li>
-                ))}
-            </ul>
-            <div>
-                <span className={styles.bold}>{"Points: "}</span>
-                {player.points}
-            </div>
+                    </div>
+                    <ul className={styles.list}>
+                        <li>
+                            <span className={styles.bold}>{"PHF: "}</span>
+                            {player.league_scoring_rates.phf}
+                        </li>
+                        <li>
+                            <span className={styles.bold}>{"NCAA: "}</span>
+                            {player.league_scoring_rates.ncaa}
+                        </li>
+                        <li>
+                            <span className={styles.bold}>{"U Sports: "}</span>
+                            {player.league_scoring_rates.usports}
+                        </li>
+                        <li>
+                            <span className={styles.bold}>{"NCAA DIII: "}</span>
+                            {player.league_scoring_rates.ncaa_dii}
+                        </li>
+                        <li>
+                            <span className={styles.bold}>{"SDHL: "}</span>
+                            {player.league_scoring_rates.sdhl}
+                        </li>
+                    </ul>
+                    <div>
+                        <span className={styles.bold}>{"Current Stats"}</span>
+                    </div>
+                    <ul className={styles.list}>
+                        {_.map(player.stats, (value, stat) => (
+                            <li>
+                                <span className={styles.bold}>
+                                    {_.toUpper(stat) + ": "}
+                                </span>
+                                {value}
+                            </li>
+                        ))}
+                    </ul>
+                    <div>
+                        <span className={styles.bold}>{"Points: "}</span>
+                        {player.points.toFixed(2)}
+                    </div>
+                </>
+            ) : (
+                <div>
+                    Something went wrong! No player matching this ID could be
+                    found.
+                </div>
+            )}
         </Layout>
     );
 }
@@ -97,12 +106,12 @@ export async function getStaticPaths() {
               );
 
     const playerQuerySnapshot = await getDocs(playerQuery);
-    playerQuerySnapshot.forEach(doc => {
+    playerQuerySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         players.push({ params: { id: doc.data().playerId } });
     });
 
-    return { paths: players, fallback: false };
+    return { paths: players, fallback: true };
 }
 export async function getStaticProps({ params }) {
     const db = getFirestore();
@@ -111,7 +120,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            player: docSnap.data(),
+            player: !docSnap.exists() ? null : docSnap.data(),
         },
     };
 }

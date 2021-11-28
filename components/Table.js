@@ -35,7 +35,7 @@ export default function MyTable(props) {
                                         : undefined
                                 )}
                             >
-                                {// Render the header
+                                {// Cell the header
                                 column.render("Header")}
 
                                 {column.render("Header") === "#" ? (
@@ -76,7 +76,7 @@ export default function MyTable(props) {
                                         key={cell.render("Cell")}
                                         {...cell.getCellProps()}
                                     >
-                                        {// Render the cell contents
+                                        {// Cell the cell contents
                                         cell.render("Cell")}
                                     </td>
                                 );

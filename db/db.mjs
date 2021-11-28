@@ -175,7 +175,7 @@ async function addTeams(teams_json) {
     _.forEach(teams, (team) => {
         const userId = uuidv4();
         batch.set(firestore.doc(`leagues/phf2122/teams/${userId}`), {
-            userId: uuidv4(),
+            userId: userId,
             teamName: team.teamName,
             players: _.map(team.players, "playerId"),
             changes: 0,
@@ -221,7 +221,7 @@ async function getPlayerInfo(team) {
 }
 
 // initializePlayers();
-addTeams("./db/phf_teams.json");
+// addTeams("./db/phf_teams.json");
 // updateSkaterStats(
 //     "./db/spreadsheets/skater_stats-11-26-21.csv",
 //     "./db/spreadsheets/goalie_stats-11-26-21.csv"

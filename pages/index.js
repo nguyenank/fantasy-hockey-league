@@ -32,13 +32,13 @@ export async function getStaticProps() {
     );
 
     const teamQuerySnapshot = await getDocs(teamQuery);
-    teamQuerySnapshot.forEach(doc => {
+    teamQuerySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         teams.push(doc.data());
     });
 
     const playerQuerySnapshot = await getDocs(playerQuery);
-    playerQuerySnapshot.forEach(doc => {
+    playerQuerySnapshot.forEach((doc) => {
         players.push(doc.data());
     });
 
@@ -57,34 +57,6 @@ export async function getStaticProps() {
 }
 
 export default function Index({ teams, players }) {
-    const testTeams = [
-        { teamName: "My First Team", points: 42, index: 1 },
-        { teamName: "My Second Team", points: 35, index: 2 },
-    ];
-    const testPlayers = [
-        {
-            name: "Amanda Leveille",
-            team: "MIN",
-            points: 12.99,
-            index: 1,
-            playerId: "1232",
-        },
-        {
-            name: "Katie Burt",
-            team: "BOS",
-            points: 11.43,
-            index: 2,
-            playerId: "132",
-        },
-        {
-            name: "Elaine Chuli",
-            team: "TOR",
-            points: 5.84,
-            index: 3,
-            playerId: "133",
-        },
-    ];
-
     return (
         <Layout pageHeader={""}>
             <div className={styles.columns}>
@@ -98,9 +70,25 @@ export default function Index({ teams, players }) {
                 <div className={styles.tableArea}>
                     <h4>Top 10 Players</h4>
                     <PlayerTable players={players} />
-                    <Link href="/player-leaderboard">
-                        <a className={styles.links}>View Player Leaderboard</a>
-                    </Link>
+                    <div>
+                        <Link href="/player-leaderboard">
+                            <a className={styles.links}>
+                                View Player Leaderboard
+                            </a>
+                        </Link>
+                        {" | "}
+                        <Link href="/skater-leaderboard">
+                            <a className={styles.links}>
+                                View Skater Leaderboard
+                            </a>
+                        </Link>
+                        {" | "}
+                        <Link href="/goalie-leaderboard">
+                            <a className={styles.links}>
+                                View Goalie Leaderboard
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Layout>
