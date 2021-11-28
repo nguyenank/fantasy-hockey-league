@@ -22,7 +22,7 @@ export default function Player({ player }) {
         MET: "Metropolitan Riveters (MET)",
         BUF: "Buffalo Beauts (BUF)",
     };
-    const skater = player.position !== "G";
+    const skater = player ? player.position !== "G" : false;
     return (
         <Layout pageHeader={player ? player.name : "Player Not Found"}>
             {player ? (
