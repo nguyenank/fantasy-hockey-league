@@ -168,8 +168,61 @@ async function updateSkaterStats(
     console.log("Players updated!");
 }
 
+async function addTeams(teams_json) {
+    const data = JSON.parse(fs.readFileSync(teams_json));
+    const batch = firestore.batch();
+    const teams = await generateTeams(data);
+    _.forEach(teams, (team) => {
+        const userId = uuidv4();
+        batch.set(firestore.doc(`leagues/phf2122/teams/${userId}`), {
+            userId: uuidv4(),
+            teamName: team.teamName,
+            players: _.map(team.players, "playerId"),
+            changes: 0,
+            points: _.sum(_.map(team.players, "points")),
+        });
+    });
+    await batch.commit();
+    console.log("Teams added!");
+}
+async function generateTeams(teams) {
+    async function generateTeam(t) {
+        const players = await getPlayerInfo(t.players);
+        return { teamName: t.teamName, players: players };
+    }
+
+    return new Promise((resolve) => {
+        resolve(Promise.all(teams.map((t) => generateTeam(t))));
+    });
+}
+
+async function getPlayerInfo(team) {
+    async function findPlayerId(player) {
+        const q = firestore
+            .collection("leagues/phf2122/players")
+            .where("name", "==", player);
+        const querySnapshot = await q.get();
+        if (querySnapshot.size !== 1) {
+            throw `not enough/too many players with same name: ${player}, ${querySnapshot.size} players found`;
+        }
+        let playerId;
+        let points;
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            playerId = doc.id;
+            points = doc.data().points;
+        });
+        return { player, playerId, points };
+    }
+
+    return new Promise((resolve) => {
+        resolve(Promise.all(team.map((p) => findPlayerId(p))));
+    });
+}
+
 // initializePlayers();
-updateSkaterStats(
-    "./db/spreadsheets/skater_stats-11-26-21.csv",
-    "./db/spreadsheets/goalie_stats-11-26-21.csv"
-);
+addTeams("./db/phf_teams.json");
+// updateSkaterStats(
+//     "./db/spreadsheets/skater_stats-11-26-21.csv",
+//     "./db/spreadsheets/goalie_stats-11-26-21.csv"
+// );

@@ -1,0 +1,988 @@
+[
+    {
+        "teamName": "The Ives of Marchment",
+        "players": [
+            "Kennedy Marchment",
+            "Jonna Curtis",
+            "Audra Morrison",
+            "Brooke Boquist",
+            "Katelynn Russ",
+            "Tori Charron",
+            "Rebecca Morse",
+            "Tori Howran",
+            "Patti Marshall",
+            "Emma Greco",
+            "Amanda Leveille",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Twigs",
+        "players": [
+            "Brooke Boquist",
+            "Allie Thunstrom",
+            "Emma Woods",
+            "Tori Sullivan",
+            "Emily Fluke",
+            "Tori Charron",
+            "Tori Howran",
+            "Winny Brodt-Brown",
+            "Abby Cook",
+            "Lenka \u010curmov\u00e1",
+            "Amanda Leveille",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Explaining to Everyone...",
+        "players": [
+            "McKenna Brand",
+            "Jillian Dempsey",
+            "Meghara McManus",
+            "Taylor Wenczkowski",
+            "Kennedy Marchment",
+            "Mallory Rushton",
+            "Mallory Souliotis",
+            "Lauren Kelly",
+            "Hannah Bates",
+            "Sara Bustad",
+            "Lovisa Selander",
+            "Caty Flagg"
+        ]
+    },
+    {
+        "teamName": "Flynnies",
+        "players": [
+            "Taylor Wenczkowski",
+            "Cailey Hutchison",
+            "Audra Morrison",
+            "Kayla Friesen",
+            "Madison Packer",
+            "Sammy Davis",
+            "Marie-Jo Pelletier",
+            "Paige Capistran",
+            "Saroya Tinker",
+            "Emma Greco",
+            "Carly Jackson",
+            "Katie Burt"
+        ]
+    },
+    {
+        "teamName": "DJ's Ugly Duckling",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Kennedy Marchment",
+            "Emma Woods",
+            "Taylor Day",
+            "Janine Weber",
+            "Katelynn Russ",
+            "Saroya Tinker",
+            "Emilie Harley",
+            "Hannah Bates",
+            "Christine Chao",
+            "Amanda Leveille",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Catamount Country",
+        "players": [
+            "Emily Fluke",
+            "Mikyla Grant-Mentis",
+            "Katelynn Russ",
+            "Christina Putigna",
+            "Allie Munroe",
+            "Erin Gehen",
+            "Mallory Souliotis",
+            "Lisa Martinson",
+            "Saroya Tinker",
+            "Rebecca Morse",
+            "Carly Jackson",
+            "Elaine Chuli"
+        ]
+    },
+    {
+        "teamName": "Team Pick224",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Shiann Darkangelo",
+            "Kennedy Marchment",
+            "Meghara McManus",
+            "Tori Charron",
+            "Haley Frade",
+            "Amanda Boulier",
+            "Dominique Kremer",
+            "Emilie Harley",
+            "Emma Greco",
+            "Elaine Chuli",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "The A is for A Lesbian",
+        "players": [
+            "Emma Vlasic",
+            "Mikyla Grant-Mentis",
+            "Emily Fluke",
+            "Catherine Crawley",
+            "Stephanie Anderson",
+            "Allie Thunstrom",
+            "Saroya Tinker",
+            "Rebecca Morse",
+            "Elena Orlando",
+            "Samantha Fieseler",
+            "Carly Jackson",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Gut feelings because it's 40min before puck drop",
+        "players": [
+            "Jonna Curtis",
+            "Alyssa Wohlfeiler",
+            "Christina Putigna",
+            "Meghan Lorence",
+            "Audra Morrison",
+            "Lexie Laing",
+            "Leila Kilduff",
+            "Taylor Marchin",
+            "Elena Orlando",
+            "Emma Greco",
+            "Lovisa Selander",
+            "Caty Flagg"
+        ]
+    },
+    {
+        "teamName": "Out of the Woods",
+        "players": [
+            "Amy Curlew",
+            "Emily Fluke",
+            "Taylor Accursi",
+            "Emma Woods",
+            "Brooke Boquist",
+            "Nicole Schammel",
+            "Lindsay Eastwood",
+            "Taylor Woods",
+            "Taylor Turnquist",
+            "Allie Munroe",
+            "Samantha Ridgewell",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Hockey (Taylor's Version)",
+        "players": [
+            "Taylor Wenczkowski",
+            "Taylor Accursi",
+            "Taylor Wasylk",
+            "Taylor Girard",
+            "Taylor Day",
+            "Christina Putigna",
+            "Taylor Marchin",
+            "Taylor Turnquist",
+            "Taylor Woods",
+            "Taylor Davison",
+            "Carly Jackson",
+            "Amanda Leveille"
+        ]
+    },
+    {
+        "teamName": "The Spice Must Bo",
+        "players": [
+            "McKenna Brand",
+            "Emily Fluke",
+            "Christina Putigna",
+            "Brooke Boquist",
+            "Brittany Colton",
+            "Nora MacLaine",
+            "Tori Howran",
+            "Mallory Souliotis",
+            "Taylor Turnquist",
+            "Dominique Kremer",
+            "Abbie Ives",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Ives on the Prize",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Autumn MacDougall",
+            "Brooke Boquist",
+            "Emma Woods",
+            "Shiann Darkangelo",
+            "Kennedy Ganser",
+            "Saroya Tinker",
+            "Allie Munroe",
+            "Rachael Ade",
+            "Christine Chao",
+            "Abbie Ives",
+            "Amanda Leveille"
+        ]
+    },
+    {
+        "teamName": "Buffalo Wings",
+        "players": [
+            "Kelly Babstock",
+            "Ashleigh Brykaliuk",
+            "Anjelica Diffendal",
+            "Emily Fluke",
+            "Grace Klienbach",
+            "Rebecca Russo",
+            "Taylor Davison",
+            "Shannon Turner",
+            "Elena Orlando",
+            "Marie-Jo Pelletier",
+            "Carly Jackson",
+            "Elaine Chuli"
+        ]
+    },
+    {
+        "teamName": "@sosayslucia",
+        "players": [
+            "Jillian Dempsey",
+            "McKenna Brand",
+            "Meghara McManus",
+            "Kennedy Marchment",
+            "Mallory Rushton",
+            "Taylor Wenczkowski",
+            "Mallory Souliotis",
+            "Lauren Kelly",
+            "Hannah Bates",
+            "Sara Bustad",
+            "Lovisa Selander",
+            "Caty Flagg"
+        ]
+    },
+    {
+        "teamName": "The Puck Noobs",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Christina Putigna",
+            "Taylor Accursi",
+            "Erin Gehen",
+            "Kayla Friesen",
+            "Maegan Beres",
+            "Allie Munroe",
+            "Taylor Turnquist",
+            "Mallory Souliotis",
+            "Dominique Kremer",
+            "Carly Jackson",
+            "Samantha Ridgewell"
+        ]
+    },
+    {
+        "teamName": "The better PHH Podcast team",
+        "players": [
+            "McKenna Brand",
+            "Mikyla Grant-Mentis",
+            "Allie Thunstrom",
+            "Romana Ko\u0161eck\u00e1",
+            "Nora MacLaine",
+            "Erin Gehen",
+            "Lindsay Eastwood",
+            "Tori Howran",
+            "Allie Olnowich",
+            "Samantha Fieseler",
+            "Carly Jackson",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Royal Icing",
+        "players": [
+            "McKenna Brand",
+            "Grace Klienbach",
+            "Alyssa Wohlfeiler",
+            "Mikyla Grant-Mentis",
+            "Brittany Colton",
+            "Kaycie Anderson",
+            "Jenna Rheault",
+            "Shannon Turner",
+            "Hanna Beattie",
+            "Lindsay Eastwood",
+            "Carly Jackson",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Moscow Snowplows",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Kennedy Marchment",
+            "Emily Fluke",
+            "Taylor Day",
+            "Amanda Conway",
+            "Romana Ko\u0161eck\u00e1",
+            "Saroya Tinker",
+            "Christine Chao",
+            "Allie Munroe",
+            "Hannah Bates",
+            "Amanda Leveille",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Pride & Prejudice",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Emily Fluke",
+            "Christina Putigna",
+            "Brooke Boquist",
+            "Meghara McManus",
+            "Taylor Wenczkowski",
+            "Mallory Souliotis",
+            "Saroya Tinker",
+            "Jenna Rheault",
+            "Winny Brodt-Brown",
+            "Amanda Leveille",
+            "Mariah Fujimagari"
+        ]
+    },
+    {
+        "teamName": "Antalya Foxes",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Taylor Wenczkowski",
+            "Cailey Hutchison",
+            "Allie Thunstrom",
+            "Sammy Davis",
+            "Brooke Avery",
+            "Lindsay Eastwood",
+            "Saroya Tinker",
+            "Rebecca Morse",
+            "Taylor Marchin",
+            "Carly Jackson",
+            "Samantha Ridgewell"
+        ]
+    },
+    {
+        "teamName": "RIP Calgary Inferno",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Emily Fluke",
+            "Lexie Laing",
+            "Jonna Curtis",
+            "Taylor Wenczkowski",
+            "Taylor Accursi",
+            "Jenna Rheault",
+            "Rachael Ade",
+            "Maddie Rowe",
+            "Emma Greco",
+            "Abbie Ives",
+            "Katie Burt"
+        ]
+    },
+    {
+        "teamName": "Face On",
+        "players": [
+            "Kendall Cornine",
+            "Alyssa Wohlfeiler",
+            "Emma Woods",
+            "Audra Morrison",
+            "Autumn MacDougall",
+            "Anjelica Diffendal",
+            "Mallory Souliotis",
+            "Taylor Turnquist",
+            "Stephanie Sucharda",
+            "Rachael Ade",
+            "Lovisa Selander",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Klienbach to the Fluketure",
+        "players": [
+            "Grace Klienbach",
+            "Emily Fluke",
+            "Mikyla Grant-Mentis",
+            "Haley Mack",
+            "Christina Putigna",
+            "Taylor Wenczkowski",
+            "Saroya Tinker",
+            "Taylor Turnquist",
+            "Abby Cook",
+            "Lenka \u010curmov\u00e1",
+            "Elaine Chuli",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Magic Mullets",
+        "players": [
+            "Cassidy Vinkle",
+            "Kayla Friesen",
+            "Mallory Rushton",
+            "Audra Morrison",
+            "Michela Cava",
+            "Kennedy Marchment",
+            "Emma Keenan",
+            "Allie Munroe",
+            "Abby Cook",
+            "Taylor Turnquist",
+            "Carly Jackson",
+            "Amanda Leveille"
+        ]
+    },
+    {
+        "teamName": "Sammy Davis' Rink Rat Pack",
+        "players": [
+            "Jillian Dempsey",
+            "Sammy Davis",
+            "Kayla Friesen",
+            "Lexie Laing",
+            "Amanda Conway",
+            "Autumn MacDougall",
+            "Elena Orlando",
+            "Allie Olnowich",
+            "Hanna Beattie",
+            "Lenka \u010curmov\u00e1",
+            "Elaine Chuli",
+            "Lovisa Selander"
+        ]
+    },
+    {
+        "teamName": "Jennatime, Jennawhere",
+        "players": [
+            "Jenna Suokko",
+            "Alyssa Wohlfeiler",
+            "Nicole Schammel",
+            "Jonna Curtis",
+            "Ashleigh Brykaliuk",
+            "Tori Sullivan",
+            "Samantha Fieseler",
+            "Abby Cook",
+            "Patti Marshall",
+            "Dominique Kremer",
+            "Abbie Ives",
+            "Elaine Chuli"
+        ]
+    },
+    {
+        "teamName": "Am I allowed to play?",
+        "players": [
+            "Jillian Dempsey",
+            "Madison Packer",
+            "Shiann Darkangelo",
+            "Cailey Hutchison",
+            "Mallory Rushton",
+            "Grace Klienbach",
+            "Allie Olnowich",
+            "Lenka \u010curmov\u00e1",
+            "Amanda Boulier",
+            "Shannon Turner",
+            "Lovisa Selander",
+            "Caty Flagg"
+        ]
+    },
+    {
+        "teamName": "Beauts or Bust",
+        "players": [
+            "Katelynn Russ",
+            "Cassidy Vinkle",
+            "Jenna Suokko",
+            "Emily Janiga",
+            "Mikyla Grant-Mentis",
+            "Shiann Darkangelo",
+            "Marie-Jo Pelletier",
+            "Emilie Harley",
+            "Lenka \u010curmov\u00e1",
+            "Sara Bustad",
+            "Carly Jackson",
+            "Mariah Fujimagari"
+        ]
+    },
+    {
+        "teamName": "Keephfing Karlsson",
+        "players": [
+            "Jonna Curtis",
+            "Meghara McManus",
+            "Tori Sullivan",
+            "Mallory Rushton",
+            "Mikyla Grant-Mentis",
+            "Brooke Boquist",
+            "Tori Howran",
+            "Sara Bustad",
+            "Lindsay Eastwood",
+            "Lenka \u010curmov\u00e1",
+            "Abbie Ives",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "here kitty kitty phfphfphf",
+        "players": [
+            "Anjelica Diffendal",
+            "Michela Cava",
+            "Audra Morrison",
+            "Christina Putigna",
+            "Mallory Rushton",
+            "Mikyla Grant-Mentis",
+            "Taylor Woods",
+            "Taylor Davison",
+            "Shannon Turner",
+            "Kristen Barbara",
+            "Carly Jackson",
+            "Mariah Fujimagari"
+        ]
+    },
+    {
+        "teamName": "Goon Squad",
+        "players": [
+            "Jillian Dempsey",
+            "Brittany Colton",
+            "Kennedy Marchment",
+            "Cailey Hutchison",
+            "Brooke Avery",
+            "Haley Mack",
+            "Amanda Boulier",
+            "Mallory Souliotis",
+            "Elena Orlando",
+            "Saroya Tinker",
+            "Carly Jackson",
+            "Brooke Wolejko"
+        ]
+    },
+    {
+        "teamName": "Unnamed Future PHF Team in Calgary",
+        "players": [
+            "McKenna Brand",
+            "Taylor Accursi",
+            "Autumn MacDougall",
+            "Abby Cook",
+            "Taylor Wasylk",
+            "Madison Packer",
+            "Saroya Tinker",
+            "Maddie Rowe",
+            "Sarah Steele",
+            "Emma Greco",
+            "Carly Jackson",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "The Unicorn Rainbows",
+        "players": [
+            "Jillian Dempsey",
+            "Mikyla Grant-Mentis",
+            "Sammy Davis",
+            "Audra Morrison",
+            "Janka Hlinka",
+            "Leah Marino",
+            "Kaleigh Fratkin",
+            "Saroya Tinker",
+            "Elena Orlando",
+            "Taylor Marchin",
+            "Carly Jackson",
+            "Allie Morse"
+        ]
+    },
+    {
+        "teamName": "Pterodactyl Hockey Federation",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Brooke Boquist",
+            "Autumn MacDougall",
+            "Alex Woken",
+            "Brooke Avery",
+            "Tori Sullivan",
+            "Taylor Woods",
+            "Mallory Souliotis",
+            "Tori Howran",
+            "Kristen Barbara",
+            "Elaine Chuli",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Fast and Furious",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Tori Sullivan",
+            "Autumn MacDougall",
+            "Brooke Boquist",
+            "Emily Janiga",
+            "Paige Capistran",
+            "Saroya Tinker",
+            "Taylor Turnquist",
+            "Dominique Kremer",
+            "Rebecca Morse",
+            "Amanda Leveille",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Puckin' Trouble",
+        "players": [
+            "Lexie Laing",
+            "Cailey Hutchison",
+            "Mikyla Grant-Mentis",
+            "Jenna Suokko",
+            "Grace Klienbach",
+            "Allie Olnowich",
+            "Kaleigh Fratkin",
+            "Saroya Tinker",
+            "Rebecca Morse",
+            "Lenka \u010curmov\u00e1",
+            "Elaine Chuli",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Former Whale (and those that left and came back)",
+        "players": [
+            "Kayla Friesen",
+            "Katelynn Russ",
+            "Grace Klienbach",
+            "Kelly Babstock",
+            "Janine Weber",
+            "Emily Fluke",
+            "Amanda Boulier",
+            "Kaleigh Fratkin",
+            "Elena Orlando",
+            "Rachael Ade",
+            "Mariah Fujimagari",
+            "Brooke Wolejko"
+        ]
+    },
+    {
+        "teamName": "Transition Game",
+        "players": [
+            "Tori Sullivan",
+            "Meghara McManus",
+            "Amy Curlew",
+            "Brooke Boquist",
+            "Christina Putigna",
+            "Nicole Schammel",
+            "Allie Munroe",
+            "Lenka \u010curmov\u00e1",
+            "Lindsay Eastwood",
+            "Abby Cook",
+            "Carly Jackson",
+            "Amanda Leveille"
+        ]
+    },
+    {
+        "teamName": "Down With the Vlasicness",
+        "players": [
+            "Kennedy Marchment",
+            "Emma Vlasic",
+            "Taylor Girard",
+            "Brooke Boquist",
+            "Annie MacDonald",
+            "Maegan Beres",
+            "Mallory Souliotis",
+            "Lindsay Eastwood",
+            "Tori Howran",
+            "Mak Langei",
+            "Carly Jackson",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "The team to be Named Later",
+        "players": [
+            "Cassidy Vinkle",
+            "Kayla Friesen",
+            "Christina Putigna",
+            "Emma Woods",
+            "Tori Sullivan",
+            "Romana Ko\u0161eck\u00e1",
+            "Shannon Turner",
+            "Lindsay Eastwood",
+            "Taylor Turnquist",
+            "Emma Keenan",
+            "Carly Jackson",
+            "Amanda Leveille"
+        ]
+    },
+    {
+        "teamName": "Tank Cleaners",
+        "players": [
+            "Jillian Dempsey",
+            "Missy Segall",
+            "Kendall Cornine",
+            "Shiann Darkangelo",
+            "Cailey Hutchison",
+            "Haylea Schmid",
+            "Kaleigh Fratkin",
+            "Rebecca Morse",
+            "Emma Keenan",
+            "Christine Chao",
+            "Amanda Leveille",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Gordie's Goons (feat. Tito)",
+        "players": [
+            "Christina Putigna",
+            "Tori Sullivan",
+            "Kennedy Marchment",
+            "Anjelica Diffendal",
+            "Mallory Rushton",
+            "Leah Marino",
+            "Mallory Souliotis",
+            "Amanda Boulier",
+            "Emilie Harley",
+            "Sara Bustad",
+            "Lovisa Selander",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Pittsburgh Mary Readers",
+        "players": [
+            "Katelynn Russ",
+            "Janine Weber",
+            "Kelly Babstock",
+            "Amy Curlew",
+            "Christina Putigna",
+            "Mikyla Grant-Mentis",
+            "Paige Capistran",
+            "Sara Bustad",
+            "Emma Keenan",
+            "Lenka \u010curmov\u00e1",
+            "Lovisa Selander",
+            "Abbie Ives"
+        ]
+    },
+    {
+        "teamName": "Team Zam Cam",
+        "players": [
+            "Emily Janiga",
+            "Anjelica Diffendal",
+            "Madison Packer",
+            "Emma Vlasic",
+            "Cailey Hutchison",
+            "Kennedy Ganser",
+            "Shannon Turner",
+            "Elena Orlando",
+            "Kaleigh Fratkin",
+            "Emma Greco",
+            "Amanda Leveille",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "The Walleye is Dead, Long Live the Loon!",
+        "players": [
+            "Allie Thunstrom",
+            "Haley Mack",
+            "Jonna Curtis",
+            "Shiann Darkangelo",
+            "Meghara McManus",
+            "Haylea Schmid",
+            "Hannah Bates",
+            "Taylor Turnquist",
+            "Saroya Tinker",
+            "Winny Brodt-Brown",
+            "Amanda Leveille",
+            "Brooke Wolejko"
+        ]
+    },
+    {
+        "teamName": "PHH Podcast",
+        "players": [
+            "Jonna Curtis",
+            "Sammy Davis",
+            "Rebecca Russo",
+            "Cassidy MacPherson",
+            "Maegan Beres",
+            "Anjelica Diffendal",
+            "Shannon Turner",
+            "Saroya Tinker",
+            "Sara Bustad",
+            "Emilie Harley",
+            "Amanda Leveille",
+            "Brooke Wolejko"
+        ]
+    },
+    {
+        "teamName": "SkaterKennys",
+        "players": [
+            "Jillian Dempsey",
+            "Cailey Hutchison",
+            "Emily Janiga",
+            "Katelynn Russ",
+            "Nicole Schammel",
+            "Amy Curlew",
+            "Kaleigh Fratkin",
+            "Samantha Fieseler",
+            "Shannon Turner",
+            "Sarah Steele",
+            "Brooke Wolejko",
+            "Lovisa Selander"
+        ]
+    },
+    {
+        "teamName": "My Pride is Showing",
+        "players": [
+            "Kennedy Marchment",
+            "Sammy Davis",
+            "Tori Sullivan",
+            "Amanda Conway",
+            "Amy Curlew",
+            "Meghara McManus",
+            "Taylor Woods",
+            "Mallory Souliotis",
+            "Taylor Turnquist",
+            "Allie Munroe",
+            "Elaine Chuli",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "All Random, Anytime, Anywhere (Except Boston)",
+        "players": [
+            "Alyssa Wohlfeiler",
+            "Allie Thunstrom",
+            "Stephanie Anderson",
+            "Michela Cava",
+            "Shiann Darkangelo",
+            "Emma Woods",
+            "Elena Orlando",
+            "Kristen Barbara",
+            "Allie Olnowich",
+            "Saroya Tinker",
+            "Caty Flagg",
+            "Tera Hofmann"
+        ]
+    },
+    {
+        "teamName": "Audra Score-ison More-ison",
+        "players": [
+            "McKenna Brand",
+            "Jenna Suokko",
+            "Michela Cava",
+            "Audra Morrison",
+            "Maegan Beres",
+            "Tori Sullivan",
+            "Tori Howran",
+            "Saroya Tinker",
+            "Hannah Bates",
+            "Emma Keenan",
+            "Elaine Chuli",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "The Frat Pack",
+        "players": [
+            "Allie Thunstrom",
+            "Taylor Wenczkowski",
+            "Kendall Cornine",
+            "Emily Fluke",
+            "Brooke Boquist",
+            "Amy Curlew",
+            "Kaleigh Fratkin",
+            "Taylor Turnquist",
+            "Rebecca Morse",
+            "Samantha Fieseler",
+            "Sonjia Shelly",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Breakout Bosses",
+        "players": [
+            "Taylor Wenczkowski",
+            "Autumn MacDougall",
+            "Haley Mack",
+            "Alex Woken",
+            "Michela Cava",
+            "Romana Ko\u0161eck\u00e1",
+            "Marie-Jo Pelletier",
+            "Tori Howran",
+            "Taylor Davison",
+            "Jenna Rheault",
+            "Lovisa Selander",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "The Homosexual Agenda",
+        "players": [
+            "Jenna Suokko",
+            "Evelina Raselli",
+            "Kennedy Marchment",
+            "Janine Weber",
+            "Janka Hlinka",
+            "Romana Ko\u0161eck\u00e1",
+            "Lenka \u010curmov\u00e1",
+            "Patti Marshall",
+            "Amanda Boulier",
+            "Shannon Turner",
+            "Lovisa Berndtsson",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Tuffest Mustard",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Amy Curlew",
+            "Brooke Boquist",
+            "Shiann Darkangelo",
+            "Erin Gehen",
+            "Kaycie Anderson",
+            "Taylor Woods",
+            "Kaleigh Fratkin",
+            "Patti Marshall",
+            "Allie Olnowich",
+            "Abbie Ives",
+            "Carly Jackson"
+        ]
+    },
+    {
+        "teamName": "Dog River River Dogs",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Allie Thunstrom",
+            "Tori Sullivan",
+            "Mallory Rushton",
+            "Taylor Girard",
+            "Haylea Schmid",
+            "Taylor Woods",
+            "Taylor Turnquist",
+            "Lenka \u010curmov\u00e1",
+            "Rebecca Morse",
+            "Carly Jackson",
+            "Sonjia Shelly"
+        ]
+    },
+    {
+        "teamName": "Philadelphia Litterers",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Kennedy Marchment",
+            "Taylor Accursi",
+            "Shiann Darkangelo",
+            "Maegan Beres",
+            "Alex Woken",
+            "Taylor Woods",
+            "Rebecca Morse",
+            "Elena Orlando",
+            "Emilie Harley",
+            "Carly Jackson",
+            "Brooke Wolejko"
+        ]
+    },
+    {
+        "teamName": "America Runs on Diffendal",
+        "players": [
+            "Mikyla Grant-Mentis",
+            "Christina Putigna",
+            "Nicole Schammel",
+            "Ashleigh Brykaliuk",
+            "Anjelica Diffendal",
+            "Katelynn Russ",
+            "Taylor Woods",
+            "Lindsay Eastwood",
+            "Tori Howran",
+            "Abby Cook",
+            "Katie Burt",
+            "Samantha Ridgewell"
+        ]
+    }
+]
