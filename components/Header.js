@@ -9,6 +9,9 @@ export default function Header() {
     const auth = getAuth();
     const [user, loading, error] = useAuthState(auth);
     const [isOpen, setOpen] = useState(false);
+
+    const loginEnabled = process.env.LOGIN === "true";
+
     return (
         <>
             <div className={styles.container}>
@@ -20,16 +23,18 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className={styles.rightSide}>
-                    <div className={styles.bold}>
-                        {user ? user.email : "Not Signed In"}
-                    </div>
+                    {loginEnabled && (
+                        <div className={styles.bold}>
+                            {user ? user.email : "Not Signed In"}
+                        </div>
+                    )}
                     <Hamburger toggled={isOpen} toggle={setOpen} />
                 </div>
             </div>
             {isOpen && (
                 <div className={styles.dropdown}>
                     <div className={styles.hr}></div>
-                    {!user ? (
+                    {!loginEnabled ? undefined : !user ? (
                         <Link href="/auth">
                             <a className={styles.link}>
                                 <span>Sign In</span>

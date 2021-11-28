@@ -15,6 +15,12 @@ export default function Footer() {
                 PHF 2021-2022 Fantasy League
             </a>{" "}
             run by <a href="https://www.theicegarden.com/">The Ice Garden</a>.
+            Data is taken from a{" "}
+            <a href="https://docs.google.com/spreadsheets/d/15kkJUbxm7UAyq57Ujxv9BORk2vb06M6Ck1bL7XkPC30/edit?usp=sharing">
+                spreadsheet of counting stats
+            </a>{" "}
+            collected by{" "}
+            <a href="https://twitter.com/DigDeepBSB">Mike Murphy</a>.
         </div>
     );
 }
