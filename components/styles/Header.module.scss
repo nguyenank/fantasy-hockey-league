@@ -24,6 +24,8 @@ $main-header-highlight: #b0eefc;
   text-decoration: none;
   display: block;
   cursor: pointer;
+  width: 100%;
+  text-align: right;
 
   &:hover {
     background-color: $main-header-highlight;
