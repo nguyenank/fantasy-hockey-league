@@ -1,5 +1,7 @@
 import Layout from "../../components/Layout";
+import Link from "next/link";
 import IndividualTable from "../../components/IndividualTable";
+import StatBlocks from "../../components/StatBlocks";
 import {
     collection,
     query,
@@ -27,19 +29,25 @@ export default function Player({ player }) {
         <Layout pageHeader={player ? player.name : "Player Not Found"}>
             {player ? (
                 <>
-                    <div className={styles.blocks}>
-                        <h5
-                            className={styles.blockText}
-                        >{`Rank (Overall): ${player.rankings.overall}/132`}</h5>
-                        <h5 className={styles.blockText}>
-                            {skater
-                                ? `Rank (Skaters): ${player.rankings.skater}/116`
-                                : `Rank (Goalies): ${player.rankings.goalie}/16`}
-                        </h5>
-                        <h5
-                            className={styles.blockText}
-                        >{`Points: ${player.points.toFixed(2)}`}</h5>
-                    </div>
+                    <StatBlocks
+                        stats={[
+                            {
+                                text: `Rank (Overall): ${player.rankings.overall}/132`,
+                                href: "/player-leaderboard",
+                            },
+                            {
+                                text: skater
+                                    ? `Rank (Skaters): ${player.rankings.skater}/116`
+                                    : `Rank (Goalies): ${player.rankings.goalie}/16`,
+                                href: skater
+                                    ? "/skater-leaderboard"
+                                    : "/goalie-leaderboard",
+                            },
+                            {
+                                text: `Points: ${player.points.toFixed(2)}`,
+                            },
+                        ]}
+                    />
                     <div className={styles.columns}>
                         {" "}
                         <div>

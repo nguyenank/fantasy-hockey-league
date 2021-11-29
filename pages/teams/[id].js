@@ -1,4 +1,5 @@
 import Layout from "../../components/Layout";
+import StatBlocks from "../../components/StatBlocks";
 import {
     collection,
     query,
@@ -21,15 +22,15 @@ export default function Team({ team, skaters, goalies }) {
         <Layout pageHeader={team ? team.teamName : "Team Not Found"}>
             {team ? (
                 <>
-                    <div className={styles.blocks}>
-                        <h5
-                            className={styles.bold}
-                        >{`Rank: ${team.rankings.overall}/58`}</h5>
-
-                        <h5
-                            className={styles.bold}
-                        >{`Points: ${team.points.toFixed(2)}`}</h5>
-                    </div>
+                    <StatBlocks
+                        stats={[
+                            {
+                                text: `Rank: ${team.rankings.overall}/58`,
+                                href: "/team-leaderboard",
+                            },
+                            { text: `Points: ${team.points.toFixed(2)}` },
+                        ]}
+                    />
                     <SkaterTable players={skaters} team={true} />
                     <div className={styles.divider}></div>
                     <GoalieTable players={goalies} team={true} />
