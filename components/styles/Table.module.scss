@@ -38,18 +38,22 @@ $light-grey: #eee;
 
   tr {
     text-align: right;
+
+    &:nth-child(even) {
+      background-color: $light-grey;
+    }
+
+    &:hover {
+      background-color: $main-header-highlight;
+    }
   }
 
   td {
     padding: 0.25rem 1rem;
   }
 
-  tr:nth-child(even) {
-    background-color: $light-grey;
-  }
-
   .boldish {
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 

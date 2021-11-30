@@ -19,6 +19,11 @@ export default function SkaterTable({ players, individual, team }) {
             },
         },
         {
+            Header: "Points",
+            accessor: "points",
+            Cell: ({ value }) => parseFloat(value).toFixed(2),
+        },
+        {
             Header: "Team",
             accessor: "team", // accessor is the "key" in the data
         },
@@ -52,11 +57,6 @@ export default function SkaterTable({ players, individual, team }) {
         },
         { Header: "Blocks", accessor: "bks" },
         { Header: "Hat Tricks", accessor: "hattys" },
-        {
-            Header: "Points",
-            accessor: "points",
-            Cell: ({ value }) => parseFloat(value).toFixed(2),
-        },
         {
             Header: "Id",
             accessor: "playerId",
