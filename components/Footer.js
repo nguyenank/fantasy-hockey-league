@@ -20,7 +20,12 @@ export default function Footer() {
                 spreadsheet of counting stats
             </a>{" "}
             collected by{" "}
-            <a href="https://twitter.com/DigDeepBSB">Mike Murphy</a>.
+            <a href="https://twitter.com/DigDeepBSB">Mike Murphy</a>. The source
+            code for the application is available at{" "}
+            <a href="https://github.com/nguyenank/fantasy-hockey-league">
+                GitHub
+            </a>
+            .
         </div>
     );
 }
