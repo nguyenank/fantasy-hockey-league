@@ -27,17 +27,24 @@ export default function Player({ player }) {
     const skater = player ? player.position !== "G" : false;
     return (
         <Layout pageHeader={player ? player.name : "Player Not Found"}>
-            {player ? (
+            {!player ? (
+                <div>
+                    Something went wrong! No player matching this ID could be
+                    found.
+                </div>
+            ) : player.not_playing ? (
+                <div>This player is not playing this season.</div>
+            ) : (
                 <>
                     <StatBlocks
                         stats={[
                             {
-                                text: `Rank (Overall): ${player.rankings.overall}/132`,
+                                text: `Rank (Overall): ${player.rankings.overall}/131`,
                                 href: "/player-leaderboard",
                             },
                             {
                                 text: skater
-                                    ? `Rank (Skaters): ${player.rankings.skater}/116`
+                                    ? `Rank (Skaters): ${player.rankings.skater}/115`
                                     : `Rank (Goalies): ${player.rankings.goalie}/16`,
                                 href: skater
                                     ? "/skater-leaderboard"
@@ -142,17 +149,13 @@ export default function Player({ player }) {
                                 data={{
                                     ...player.stats,
                                     points: player.points,
+                                    ppg: player.ppg,
                                 }}
                                 position={skater ? "skater" : "goalie"}
                             />
                         </div>
                     </div>
                 </>
-            ) : (
-                <div>
-                    Something went wrong! No player matching this ID could be
-                    found.
-                </div>
             )}
         </Layout>
     );

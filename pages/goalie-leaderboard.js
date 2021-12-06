@@ -39,25 +39,29 @@ export async function getStaticProps() {
         // doc.data() is never undefined for query doc snapshots
         players.push(doc.data());
     });
-    // players = _.orderBy(players, ["points"], "desc");
+
+    const np_players = _.remove(players, "not_playing");
+
     players = _.map(players, (player, index) => ({
         ...player,
         ...player.stats,
         index: index + 1,
         points: player.points.toFixed(2),
+        ppg: player.ppg.toFixed(2),
     }));
     return {
         props: {
             players,
+            np_players,
         },
     };
 }
 
-export default function Demo({ players }) {
+export default function Demo({ players, np_players }) {
     return (
         <Layout pageHeader={"Goalie Leaderboard"}>
             <div className="center">
-                <GoalieTable players={players} />
+                <GoalieTable players={[...players, ...np_players]} />
             </div>
             <BackToTop />
         </Layout>

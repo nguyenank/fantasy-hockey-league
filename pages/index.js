@@ -42,6 +42,14 @@ export async function getStaticProps() {
         players.push(doc.data());
     });
 
+    players = _.map(players, (player, index) => ({
+        ...player,
+        gp: player.stats.gp,
+        index: index + 1,
+        points: player.points.toFixed(2),
+        ppg: player.ppg.toFixed(2),
+    }));
+
     return {
         props: {
             teams,

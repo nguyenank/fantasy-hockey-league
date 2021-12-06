@@ -4,6 +4,8 @@ import { default as _ } from "lodash";
 export default function Table({ data, position }) {
     const statMap = {
         skater: [
+            ["ppg", "Points per Game"],
+            ["gp", "Games Played"],
             ["sog", "Shots on Goal"],
             ["g", "Goals"],
             ["a1", "Primary Assists"],
@@ -14,6 +16,8 @@ export default function Table({ data, position }) {
             ["hattys", "Hat Tricks"],
         ],
         goalie: [
+            ["ppg", "Points per Game"],
+            ["gp", "Games Played"],
             ["start", "Starts"],
             ["w", "Wins"],
             ["svs", "Saves"],
@@ -35,7 +39,7 @@ export default function Table({ data, position }) {
                                 accessor === "points" ? styles.bold : undefined
                             }
                         >
-                            {accessor === "points"
+                            {accessor === "ppg"
                                 ? data[accessor].toFixed(2)
                                 : data[accessor]}
                         </td>

@@ -11,7 +11,11 @@ export default function MyTable({ players, index }) {
         {
             Header: "Rank (Skaters / Goalies)",
             accessor: (row) =>
-                row.rankings.skater ? row.rankings.skater : row.rankings.goalie,
+                !row.rankings
+                    ? ""
+                    : row.rankings.skater
+                    ? row.rankings.skater
+                    : row.rankings.goalie,
         },
         {
             Header: "Player Name",
@@ -19,7 +23,13 @@ export default function MyTable({ players, index }) {
             Cell: ({ value, row }) => {
                 return (
                     <Link href={`/players/${row.original.playerId}`}>
-                        <a>{value}</a>
+                        <a
+                            className={
+                                row.original.not_playing ? "crossed" : ""
+                            }
+                        >
+                            {value}
+                        </a>
                     </Link>
                 );
             },
@@ -27,7 +37,16 @@ export default function MyTable({ players, index }) {
         {
             Header: "Points",
             accessor: "points",
-            Cell: ({ value }) => parseFloat(value).toFixed(2),
+            Cell: ({ value }) => (value ? parseFloat(value).toFixed(2) : ""),
+        },
+        {
+            Header: "Games Played",
+            accessor: "gp",
+        },
+        {
+            Header: "Points Per Game",
+            accessor: "ppg",
+            Cell: ({ value }) => (value ? parseFloat(value).toFixed(2) : ""),
         },
         {
             Header: "Team",
@@ -41,6 +60,11 @@ export default function MyTable({ players, index }) {
             Header: "Id",
             accessor: "playerId",
             id: "id",
+        },
+        {
+            Header: "Not Playing",
+            accessor: "not_playing",
+            id: "not_playing",
         },
     ];
 

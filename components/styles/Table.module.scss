@@ -46,6 +46,21 @@ $light-grey: #eee;
     &:hover {
       background-color: $main-header-highlight;
     }
+
+    &.strikeout {
+      td {
+        position: relative;
+
+        &:before {
+          content: " ";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 100%;
+          border-bottom: 1px solid #000;
+        }
+      }
+    }
   }
 
   td {

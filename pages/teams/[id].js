@@ -94,20 +94,32 @@ export async function getStaticProps({ params }) {
         playerQuerySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             const data = doc.data();
-            skaters.push({ ...data, ...data.stats });
+            skaters.push(data);
         });
     }
-    skaters = _.map(skaters, (player, index) => ({
+
+    const np_skaters = _.remove(skaters, "not_playing");
+    let goalies = _.remove(skaters, (s) => s.position === "G");
+    const np_goalies = _.remove(goalies, "not_playing");
+
+    skaters = _.map(_.orderBy(skaters, ["points"], "desc"), (player) => ({
         ...player,
-        index: index + 1,
+        ...player.stats,
+        points: player.points.toFixed(2),
+        ppg: player.ppg.toFixed(2),
     }));
 
-    const goalies = _.remove(skaters, (s) => s.position === "G");
+    goalies = _.map(_.orderBy(goalies, ["points"], "desc"), (player) => ({
+        ...player,
+        ...player.stats,
+        points: player.points.toFixed(2),
+        ppg: player.ppg.toFixed(2),
+    }));
 
     return {
         props: {
-            skaters,
-            goalies,
+            skaters: [...skaters, ...np_skaters],
+            goalies: [...goalies, ...np_goalies],
             team: data,
         },
     };

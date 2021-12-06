@@ -47,6 +47,7 @@ function playerDB(file_path) {
                         stats:
                             result.p === "G"
                                 ? {
+                                      gp: 0,
                                       start: 0,
                                       w: 0,
                                       svs: 0,
@@ -57,6 +58,7 @@ function playerDB(file_path) {
                                       ps_sv: 0,
                                   }
                                 : {
+                                      gp: 0,
                                       sog: 0,
                                       g: 0,
                                       a1: 0,
@@ -141,9 +143,11 @@ async function updateSkaterStats(
             0.12 * s.pend +
             0.12 * s.bks +
             s.hattys;
+        const ppg = s.gp ? points / s.gp : 0;
         batch.update(firestore.doc(`leagues/phf2122/players/${s.playerId}`), {
             stats: _.omit(s, ["name", "playerId"]),
             points: points,
+            ppg: ppg,
         });
     });
 
@@ -158,9 +162,11 @@ async function updateSkaterStats(
             0.9 * g.a1 +
             0.66 * g.a2 +
             g.ps_sv;
+        const ppg = g.gp ? points / g.gp : 0;
         batch.update(firestore.doc(`leagues/phf2122/players/${g.playerId}`), {
             stats: _.omit(g, ["name", "playerId"]),
             points: points,
+            ppg: ppg,
         });
     });
 
@@ -253,11 +259,11 @@ async function updatePlayerRankings() {
         // doc.data() is never undefined for query doc snapshots
         skaters.push(doc.data());
     });
+    skaters = _.filter(skaters, (s) => !s.not_playing);
     // calculate rankings for position and overall
     let goalies = _.remove(skaters, (p) => p.position === "G");
     skaters = _.map(skaters, (s, i) => ({ ...s, rankings: { skater: i + 1 } }));
     goalies = _.map(goalies, (g, i) => ({ ...g, rankings: { goalie: i + 1 } }));
-
     let players = _.orderBy(_.concat(skaters, goalies), ["points"], ["desc"]);
     players = _.map(players, (p, i) => ({
         ...p,
@@ -273,6 +279,7 @@ async function updatePlayerRankings() {
     await batch.commit();
     console.log("Player Rankings Updated!");
 }
+
 async function updateTeamPointsAndRankings() {
     // get teams
     const q = firestore.collection("leagues/phf2122/teams");
@@ -308,9 +315,9 @@ async function updateTeamPointsAndRankings() {
 // initializePlayers();
 // addTeams("./db/phf_teams.json");
 
-// updateSkaterStats(
-//     "./db/spreadsheets/skater_stats-11-26-21.csv",
-//     "./db/spreadsheets/goalie_stats-11-26-21.csv"
-// );
-// updatePlayerRankings();
-// updateTeamPointsAndRankings();
+await updateSkaterStats(
+    "./db/spreadsheets/skater_stats-12-05-21.csv",
+    "./db/spreadsheets/goalie_stats-12-05-21.csv"
+);
+// await updatePlayerRankings();
+// await updateTeamPointsAndRankings();

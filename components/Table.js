@@ -6,7 +6,11 @@ export default function MyTable(props) {
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
     const tableInstance = useTable(
-        { columns, data, initialState: { hiddenColumns: ["id"] } },
+        {
+            columns,
+            data,
+            initialState: { hiddenColumns: ["id", "not_playing"] },
+        },
         useSortBy
     );
     const {
@@ -95,7 +99,15 @@ export default function MyTable(props) {
                             prepareRow(row);
                             return (
                                 // Apply the row props
-                                <tr key={index} {...row.getRowProps()}>
+                                <tr
+                                    key={index}
+                                    {...row.getRowProps()}
+                                    className={
+                                        row.original.not_playing
+                                            ? styles.strikeout
+                                            : ""
+                                    }
+                                >
                                     {
                                         // Loop over the rows cells
                                         row.cells.map((cell) => {

@@ -13,7 +13,9 @@ export default function GoalieTable({ players, individual, team }) {
             Cell: ({ value, row }) => {
                 return (
                     <Link href={`/players/${row.original.playerId}`}>
-                        <a>{value}</a>
+                        <a className={row.not_playing ? "crossed" : ""}>
+                            {value}
+                        </a>
                     </Link>
                 );
             },
@@ -21,7 +23,16 @@ export default function GoalieTable({ players, individual, team }) {
         {
             Header: "Points",
             accessor: "points",
-            Cell: ({ value }) => parseFloat(value).toFixed(2),
+            Cell: ({ value }) => (value ? parseFloat(value).toFixed(2) : ""),
+        },
+        {
+            Header: "Games Played",
+            accessor: "gp",
+        },
+        {
+            Header: "Points Per Game",
+            accessor: "ppg",
+            Cell: ({ value }) => (value ? parseFloat(value).toFixed(2) : ""),
         },
         {
             Header: "Team",
@@ -61,6 +72,11 @@ export default function GoalieTable({ players, individual, team }) {
             Header: "Id",
             accessor: "playerId",
             id: "id",
+        },
+        {
+            Header: "Not Playing",
+            accessor: "not_playing",
+            id: "not_playing",
         },
     ];
 
