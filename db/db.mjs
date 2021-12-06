@@ -315,9 +315,9 @@ async function updateTeamPointsAndRankings() {
 // initializePlayers();
 // addTeams("./db/phf_teams.json");
 
-await updateSkaterStats(
-    "./db/spreadsheets/skater_stats-12-05-21.csv",
-    "./db/spreadsheets/goalie_stats-12-05-21.csv"
-);
+// await updateSkaterStats(
+//     "./db/spreadsheets/skater_stats-12-06-21.csv",
+//     "./db/spreadsheets/goalie_stats-12-06-21.csv"
+// );
 // await updatePlayerRankings();
 // await updateTeamPointsAndRankings();
