@@ -31,8 +31,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# admin json
+# database stuff
 admin.json
+db/data/
 
 # vercel
 .vercel

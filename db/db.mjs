@@ -313,11 +313,11 @@ async function updateTeamPointsAndRankings() {
 }
 
 // initializePlayers();
-// addTeams("./db/phf_teams.json");
+// addTeams("./db/data/phf_teams.json");
 
 // await updateSkaterStats(
-//     "./db/spreadsheets/skater_stats-12-07-21.csv",
-//     "./db/spreadsheets/goalie_stats-12-07-21.csv"
+//     "./db/data/skater_stats-12-07-21.csv",
+//     "./db/data/goalie_stats-12-07-21.csv"
 // );
 // await updatePlayerRankings();
 // await updateTeamPointsAndRankings();
