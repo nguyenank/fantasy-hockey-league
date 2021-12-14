@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <div className={styles.footer}>
             <hr className={styles.hr} />
-            <p>Last updated December 7, 2021.</p>
+            <p>Last updated December 13, 2021.</p>
             <p>
                 This site was created by{" "}
                 <a href="https://twitter.com/nguyenank_">An Nguyen</a> using
@@ -17,14 +17,23 @@ export default function Footer() {
                     PHF 2021-2022 Fantasy League
                 </a>{" "}
                 run by{" "}
-                <a href="https://www.theicegarden.com/">The Ice Garden</a>. Data
-                is taken from a{" "}
+                <a href="https://www.theicegarden.com/">The Ice Garden</a>.{" "}
+            </p>
+            <p>
+                Data is taken from a{" "}
                 <a href="https://docs.google.com/spreadsheets/d/15kkJUbxm7UAyq57Ujxv9BORk2vb06M6Ck1bL7XkPC30/edit?usp=sharing">
                     spreadsheet of counting stats
                 </a>{" "}
                 collected by{" "}
-                <a href="https://twitter.com/DigDeepBSB">Mike Murphy</a>. The
-                source code for the application is available at{" "}
+                <a href="https://twitter.com/DigDeepBSB">Mike Murphy</a> as well
+                as the{" "}
+                <a href="https://www.premierhockeyfederation.com/">
+                    PHF website
+                </a>
+                .
+            </p>
+            <p>
+                The source code for the application is available at{" "}
                 <a href="https://github.com/nguyenank/fantasy-hockey-league">
                     GitHub
                 </a>
