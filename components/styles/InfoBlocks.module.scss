@@ -4,10 +4,9 @@ $main-header-highlight: #b0eefc;
 .blockText,
 .blockTextFixed {
   margin-bottom: 1rem;
-  font-variant: small-caps;
   font-feature-settings: normal;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: black;
   border: 1px black solid;
   background-color: $main-header;
@@ -22,4 +21,8 @@ $main-header-highlight: #b0eefc;
 .blocks {
   display: flex;
   gap: 1rem;
+}
+
+.bold {
+  font-weight: 700;
 }

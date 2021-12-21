@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import IndividualTable from "../../components/IndividualTable";
-import StatBlocks from "../../components/StatBlocks";
+import InfoBlocks from "../../components/InfoBlocks";
 import {
     collection,
     query,
@@ -36,22 +36,27 @@ export default function Player({ player }) {
                 <div>This player is not playing this season.</div>
             ) : (
                 <>
-                    <StatBlocks
-                        stats={[
+                    <InfoBlocks
+                        info={[
                             {
-                                text: `Rank (Overall): ${player.rankings.overall}/131`,
+                                bold: "Rank (Overall): ",
+                                text: `${player.rankings.overall}/131`,
                                 href: "/player-leaderboard",
                             },
+                            skater
+                                ? {
+                                      bold: "Rank (Skaters): ",
+                                      text: `${player.rankings.skater}/115`,
+                                      href: "/skater-leaderboard",
+                                  }
+                                : {
+                                      bold: "Rank (Goalies): ",
+                                      text: `${player.rankings.goalie}/16`,
+                                      href: "/goalie-leaderboard",
+                                  },
                             {
-                                text: skater
-                                    ? `Rank (Skaters): ${player.rankings.skater}/115`
-                                    : `Rank (Goalies): ${player.rankings.goalie}/16`,
-                                href: skater
-                                    ? "/skater-leaderboard"
-                                    : "/goalie-leaderboard",
-                            },
-                            {
-                                text: `Points: ${player.points.toFixed(2)}`,
+                                bold: "Points: ",
+                                text: `${player.points.toFixed(2)}`,
                             },
                         ]}
                     />

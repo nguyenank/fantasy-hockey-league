@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import StatBlocks from "../../components/StatBlocks";
+import InfoBlocks from "../../components/InfoBlocks";
 import {
     collection,
     query,
@@ -26,7 +26,8 @@ export default function Team({ team, skaters, goalies }) {
 
     let changesTeam = [
         {
-            text: `Changes: ${team.changes}/3`,
+            bold: "Changes: ",
+            text: `${team.changes}/3`,
         },
     ];
     const changesModify =
@@ -34,7 +35,7 @@ export default function Team({ team, skaters, goalies }) {
             ? [
                   ...changesTeam,
                   {
-                      text: `Modify Team`,
+                      bold: `Modify Team`,
                       href: "/modify-team",
                   },
               ]
@@ -45,18 +46,20 @@ export default function Team({ team, skaters, goalies }) {
             {team ? (
                 <>
                     <div className={styles.columns}>
-                        <StatBlocks
-                            stats={[
+                        <InfoBlocks
+                            info={[
                                 {
-                                    text: `Rank: ${team.rankings.overall}/58`,
+                                    bold: "Rank:",
+                                    text: ` ${team.rankings.overall}/58`,
                                     href: "/team-leaderboard",
                                 },
                                 {
-                                    text: `Points: ${team.points.toFixed(2)}`,
+                                    bold: "Points: ",
+                                    text: `${team.points.toFixed(2)}`,
                                 },
                             ]}
                         />
-                        <StatBlocks stats={changesModify} />
+                        <InfoBlocks info={changesModify} />
                     </div>
                     <SkaterTable players={skaters} team={true} />
                     <div className={styles.divider}></div>
