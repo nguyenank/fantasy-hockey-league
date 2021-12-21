@@ -10,6 +10,7 @@ import {
     getFirestore,
     limit,
     orderBy,
+    where,
 } from "firebase/firestore";
 import { default as _ } from "lodash";
 import styles from "./styles/index.module.scss";
@@ -23,10 +24,12 @@ export async function getStaticProps() {
         process.env.DATA_FULL === "true"
             ? query(
                   collection(db, "leagues/phf2122/teams"),
+                  where("submitted", "==", true),
                   orderBy("points", "desc")
               )
             : query(
                   collection(db, "leagues/phf2122/teams"),
+                  where("submitted", "==", true),
                   orderBy("points", "desc"),
                   limit(25)
               );
