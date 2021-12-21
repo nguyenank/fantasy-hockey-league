@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import StatBlocks from "../../components/StatBlocks";
 import {
@@ -11,6 +12,8 @@ import {
     orderBy,
     where,
 } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import SkaterTable from "../../components/SkaterTable";
 import GoalieTable from "../../components/GoalieTable";
 import BackToTop from "../../components/BackToTop";
@@ -18,19 +21,43 @@ import _ from "lodash";
 import styles from "./team.module.scss";
 
 export default function Team({ team, skaters, goalies }) {
+    const auth = getAuth();
+    const [user, loading, error] = useAuthState(auth);
+
+    let changesTeam = [
+        {
+            text: `Changes: ${team.changes}/3`,
+        },
+    ];
+    const changesModify =
+        user && user.uid === team.userId
+            ? [
+                  ...changesTeam,
+                  {
+                      text: `Modify Team`,
+                      href: "/modify-team",
+                  },
+              ]
+            : changesTeam;
+
     return (
         <Layout pageHeader={team ? team.teamName : "Team Not Found"}>
             {team ? (
                 <>
-                    <StatBlocks
-                        stats={[
-                            {
-                                text: `Rank: ${team.rankings.overall}/58`,
-                                href: "/team-leaderboard",
-                            },
-                            { text: `Points: ${team.points.toFixed(2)}` },
-                        ]}
-                    />
+                    <div className={styles.columns}>
+                        <StatBlocks
+                            stats={[
+                                {
+                                    text: `Rank: ${team.rankings.overall}/58`,
+                                    href: "/team-leaderboard",
+                                },
+                                {
+                                    text: `Points: ${team.points.toFixed(2)}`,
+                                },
+                            ]}
+                        />
+                        <StatBlocks stats={changesModify} />
+                    </div>
                     <SkaterTable players={skaters} team={true} />
                     <div className={styles.divider}></div>
                     <GoalieTable players={goalies} team={true} />

@@ -9,7 +9,7 @@ export default function Header() {
     const auth = getAuth();
     const [user, loading, error] = useAuthState(auth);
     const [isOpen, setOpen] = useState(false);
-    const loginEnabled = false;
+    const loginEnabled = true;
     return (
         <>
             <div className={styles.container}>
@@ -41,11 +41,6 @@ export default function Header() {
                         </Link>
                     ) : (
                         <>
-                            <Link href={`/teams/${user.uid}`}>
-                                <a className={styles.link}>
-                                    <span>Your Team</span>
-                                </a>
-                            </Link>
                             <a
                                 className={styles.link}
                                 onClick={() => {
@@ -54,6 +49,12 @@ export default function Header() {
                             >
                                 <span>Sign Out</span>
                             </a>
+                            <h5 className={styles.leaderboard}>Teams</h5>
+                            <Link href={`/teams/${user.uid}`}>
+                                <a className={styles.link}>
+                                    <span>PHF 2021-2022</span>
+                                </a>
+                            </Link>
                         </>
                     )}
                     <h5 className={styles.leaderboard}>Leaderboards</h5>
