@@ -1,18 +1,44 @@
-import { useTable, useSortBy } from "react-table";
-import { useMemo } from "react";
+import { useTable, useSortBy, useRowSelect } from "react-table";
+import { useMemo, useEffect } from "react";
 import styles from "./styles/Table.module.scss";
 
 export default function MyTable(props) {
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
-    const tableInstance = useTable(
+    let tableArguments = [
         {
             columns,
             data,
             initialState: { hiddenColumns: ["id", "not_playing"] },
         },
-        useSortBy
-    );
+        useSortBy,
+    ];
+    if (props.rowSelect) {
+        tableArguments.push(useRowSelect);
+        tableArguments.push((hooks) => {
+            hooks.visibleColumns.push((columns) => [
+                // Let's make a column for selection
+                {
+                    id: "selection",
+                    Header: ({ getToggleAllRowsSelectedProps }) => <div></div>,
+                    Cell: ({ row }) => {
+                        const selectedProps = row.getToggleRowSelectedProps();
+                        return (
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedProps.checked}
+                                    readOnly
+                                />
+                            </div>
+                        );
+                    },
+                },
+                ...columns,
+            ]);
+        });
+    }
+    const tableInstance = useTable(...tableArguments);
     const {
         getTableProps,
         getTableBodyProps,
@@ -35,57 +61,62 @@ export default function MyTable(props) {
                             >
                                 {
                                     // Loop over the headers in each row
-                                    headerGroup.headers.map((column) => (
+                                    headerGroup.headers.map((column) => {
+                                        const staticHeader =
+                                            column.render("Header") === "#" ||
+                                            column.id === "selection";
                                         // Apply the header cell props
-                                        <th
-                                            className={
-                                                column.render("Header") === "#"
-                                                    ? styles.noHover
-                                                    : undefined
-                                            }
-                                            key={column.render("Header")}
-                                            {...column.getHeaderProps(
-                                                column.render("Header") !== "#"
-                                                    ? column.getSortByToggleProps()
-                                                    : undefined
-                                            )}
-                                        >
-                                            {
-                                                // Cell the header
-                                                column.render("Header")
-                                            }
+                                        return (
+                                            <th
+                                                className={
+                                                    staticHeader
+                                                        ? styles.noHover
+                                                        : undefined
+                                                }
+                                                key={column.render("Header")}
+                                                {...column.getHeaderProps(
+                                                    staticHeader
+                                                        ? undefined
+                                                        : column.getSortByToggleProps()
+                                                )}
+                                            >
+                                                {
+                                                    // Cell the header
+                                                    column.render("Header")
+                                                }
 
-                                            {column.render("Header") === "#" ? (
-                                                ""
-                                            ) : column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <span
-                                                        className={
-                                                            styles.isSorted
-                                                        }
-                                                    >
-                                                        {" ▼"}
-                                                    </span>
+                                                {staticHeader ? (
+                                                    ""
+                                                ) : column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <span
+                                                            className={
+                                                                styles.isSorted
+                                                            }
+                                                        >
+                                                            {" ▼"}
+                                                        </span>
+                                                    ) : (
+                                                        <span
+                                                            className={
+                                                                styles.isSortedDesc
+                                                            }
+                                                        >
+                                                            {" ▲"}
+                                                        </span>
+                                                    )
                                                 ) : (
                                                     <span
                                                         className={
-                                                            styles.isSortedDesc
+                                                            styles.isNotSorted
                                                         }
                                                     >
-                                                        {" ▲"}
+                                                        {" ▽"}
                                                     </span>
-                                                )
-                                            ) : (
-                                                <span
-                                                    className={
-                                                        styles.isNotSorted
-                                                    }
-                                                >
-                                                    {" ▽"}
-                                                </span>
-                                            )}
-                                        </th>
-                                    ))
+                                                )}
+                                            </th>
+                                        );
+                                    })
                                 }
                             </tr>
                         ))
@@ -105,8 +136,14 @@ export default function MyTable(props) {
                                     className={
                                         row.original.not_playing
                                             ? styles.strikeout
+                                            : props.rowSelect
+                                            ? styles.rowselect
                                             : ""
                                     }
+                                    onClick={() => {
+                                        row.toggleRowSelected();
+                                        props.rowSelect(row.original.playerId);
+                                    }}
                                 >
                                     {
                                         // Loop over the rows cells
@@ -116,7 +153,9 @@ export default function MyTable(props) {
                                                 <td
                                                     className={
                                                         cell.column.id ===
-                                                        "points"
+                                                            "points" ||
+                                                        cell.column.id ===
+                                                            "fantasy_value"
                                                             ? styles.boldish
                                                             : undefined
                                                     }
