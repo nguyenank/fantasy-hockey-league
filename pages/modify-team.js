@@ -82,6 +82,9 @@ export default function ModifyTeam({ players }) {
                 <div className="center">
                     <PlayerPoolTable players={players} toggleRow={toggleRow} />
                 </div>
+                <div
+                    className={styles.status}
+                >{`Selected: ${selected.length}`}</div>
                 <BackToTop />
             </>
         );

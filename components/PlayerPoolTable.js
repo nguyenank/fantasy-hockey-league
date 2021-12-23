@@ -5,6 +5,19 @@ import { default as _ } from "lodash";
 export default function PlayerPoolTable({ players, index, toggleRow }) {
     const columns = [
         {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => <div></div>,
+            Cell: ({ row }) => (
+                <div>
+                    <input
+                        type="checkbox"
+                        {...row.getToggleRowSelectedProps()}
+                        indeterminate="false"
+                    />
+                </div>
+            ),
+        },
+        {
             Header: "Player Name",
             accessor: "name", // accessor is the "key" in the data
             Cell: ({ value, row }) => {

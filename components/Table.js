@@ -1,5 +1,5 @@
 import { useTable, useSortBy, useRowSelect } from "react-table";
-import { useMemo, useEffect } from "react";
+import { useRef, useMemo } from "react";
 import styles from "./styles/Table.module.scss";
 
 export default function MyTable(props) {
@@ -15,29 +15,8 @@ export default function MyTable(props) {
     ];
     if (props.rowSelect) {
         tableArguments.push(useRowSelect);
-        tableArguments.push((hooks) => {
-            hooks.visibleColumns.push((columns) => [
-                // Let's make a column for selection
-                {
-                    id: "selection",
-                    Header: ({ getToggleAllRowsSelectedProps }) => <div></div>,
-                    Cell: ({ row }) => {
-                        const selectedProps = row.getToggleRowSelectedProps();
-                        return (
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedProps.checked}
-                                    readOnly
-                                />
-                            </div>
-                        );
-                    },
-                },
-                ...columns,
-            ]);
-        });
     }
+
     const tableInstance = useTable(...tableArguments);
     const {
         getTableProps,
@@ -65,6 +44,7 @@ export default function MyTable(props) {
                                         const staticHeader =
                                             column.render("Header") === "#" ||
                                             column.id === "selection";
+
                                         // Apply the header cell props
                                         return (
                                             <th
