@@ -23,6 +23,10 @@ export default function MyTable(props) {
 
     return (
         <div className={styles.overflow}>
+            <div className={styles.multiselect_text}>
+                Hold <span className={styles.shift}>Shift</span> to sort by
+                multiple columns at once.
+            </div>
             <table {...getTableProps()} className={styles.tablestyle}>
                 <thead>
                     {
