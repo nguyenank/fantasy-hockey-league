@@ -2,7 +2,7 @@ import { useTable, useSortBy, useRowSelect } from "react-table";
 import { useRef, useMemo } from "react";
 import styles from "./styles/Table.module.scss";
 
-export default function MyTable(props) {
+export default function Table(props) {
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
     let tableArguments = [
@@ -14,7 +14,19 @@ export default function MyTable(props) {
         useSortBy,
     ];
     if (props.rowSelect) {
-        tableArguments.push(useRowSelect);
+        tableArguments = [
+            {
+                columns,
+                data,
+                initialState: {
+                    hiddenColumns: ["id", "not_playing"],
+                    selectedRowIds: props.selectedRowIds,
+                },
+                autoResetSelectedRows: false,
+            },
+            useSortBy,
+            useRowSelect,
+        ];
     }
 
     const tableInstance = useTable(...tableArguments);
@@ -24,10 +36,14 @@ export default function MyTable(props) {
         headerGroups,
         rows,
         prepareRow,
+        state: { selectedRowIds },
     } = tableInstance;
-
     return (
         <div className={styles.overflow}>
+            <div className={styles.multiselect_text}>
+                Hold <span className={styles.shift}>Shift</span> to sort by
+                multiple columns at once.
+            </div>
             <table {...getTableProps()} className={styles.tablestyle}>
                 <thead>
                     {
@@ -42,8 +58,10 @@ export default function MyTable(props) {
                                     // Loop over the headers in each row
                                     headerGroup.headers.map((column) => {
                                         const staticHeader =
-                                            column.render("Header") === "#" ||
-                                            column.id === "selection";
+                                            column.render("Header") === "#";
+                                        // const staticHeader =
+                                        //     column.render("Header") === "#" ||
+                                        //     column.id === "selection";
 
                                         // Apply the header cell props
                                         return (
@@ -112,6 +130,7 @@ export default function MyTable(props) {
                                 // Apply the row props
                                 <tr
                                     key={index}
+                                    id={row.original.playerId}
                                     {...row.getRowProps()}
                                     className={
                                         row.original.not_playing
@@ -122,10 +141,16 @@ export default function MyTable(props) {
                                             ? styles.selected
                                             : styles.unselected
                                     }
-                                    onClick={() => {
-                                        row.toggleRowSelected();
-                                        props.rowSelect(row.original.playerId);
-                                    }}
+                                    onClick={
+                                        props.rowSelected
+                                            ? () => {
+                                                  row.toggleRowSelected();
+                                                  props.rowSelect(
+                                                      row.original.playerId
+                                                  );
+                                              }
+                                            : undefined
+                                    }
                                 >
                                     {
                                         // Loop over the rows cells

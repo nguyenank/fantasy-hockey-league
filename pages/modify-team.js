@@ -12,10 +12,12 @@ import {
     getFirestore,
     limit,
     orderBy,
+    doc,
 } from "firebase/firestore";
 import { default as _ } from "lodash";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
 
 export async function getStaticProps() {
     // Call an external API endpoint to get posts
@@ -53,12 +55,28 @@ export async function getStaticProps() {
 
 export default function ModifyTeam({ players }) {
     const auth = getAuth();
-    const [user, loading, error] = useAuthState(auth);
-    const [selected, setSelected] = useState([]);
+    const [user, loadingUser, errorUser] = useAuthState(auth);
+
+    const [currentTeam, loadingTeam, errorTeam] = useDocumentDataOnce(
+        user
+            ? doc(getFirestore(), "leagues/phf2122/teams", user.uid)
+            : undefined
+    );
+    const [selected, setSelected] = useState(null);
+
+    if (selected === null) {
+        if (currentTeam) {
+            setSelected(currentTeam.players);
+        }
+    }
 
     const selectedPlayers = _.filter(
         players,
         (p) => _.indexOf(selected, p.playerId) !== -1
+    );
+
+    const selectedIds = _.fromPairs(
+        _.map(selected, (id) => [_.findIndex(players, ["playerId", id]), true])
     );
 
     function toggleRow(id) {
@@ -70,7 +88,9 @@ export default function ModifyTeam({ players }) {
     }
 
     let content;
-    if (!user) {
+    if (loadingUser || loadingTeam || selected === null) {
+        content = <div>Loading</div>;
+    } else if (!user) {
         content = (
             <>
                 <p>You must be logged in to create a team.</p>
@@ -79,13 +99,15 @@ export default function ModifyTeam({ players }) {
                 </Link>
             </>
         );
-    } else if (loading) {
-        content = <div>Loading </div>;
     } else {
         content = (
             <>
                 <div className="center">
-                    <PlayerPoolTable players={players} toggleRow={toggleRow} />
+                    <PlayerPoolTable
+                        players={players}
+                        toggleRow={toggleRow}
+                        selectedRowIds={selectedIds}
+                    />
                 </div>
                 <ModifyTeamStatus selectedPlayers={selectedPlayers} />
                 <BackToTop />

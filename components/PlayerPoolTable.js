@@ -1,8 +1,13 @@
 import Table from "./Table";
 import Link from "next/link";
 import { default as _ } from "lodash";
+import { useMemo } from "react";
 
-export default function PlayerPoolTable({ players, index, toggleRow }) {
+export default function PlayerPoolTable({
+    players,
+    toggleRow,
+    selectedRowIds,
+}) {
     const columns = [
         {
             id: "selection",
@@ -16,22 +21,37 @@ export default function PlayerPoolTable({ players, index, toggleRow }) {
                     />
                 </div>
             ),
+            canSort: true,
+            sortType: (rowA, rowB) => {
+                if (rowA.isSelected === rowB.isSelected) {
+                    return 0;
+                } else if (rowA.isSelected) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            },
         },
         {
             Header: "Player Name",
             accessor: "name", // accessor is the "key" in the data
             Cell: ({ value, row }) => {
                 return (
-                    <Link href={`/players/${row.original.playerId}`}>
-                        <a
-                            className={
-                                row.original.not_playing ? "crossed" : ""
-                            }
-                        >
-                            {value}
-                        </a>
-                    </Link>
+                    <div className={row.original.not_playing ? "crossed" : ""}>
+                        {value}
+                    </div>
                 );
+                // return (
+                //     <Link href={`/players/${row.original.playerId}`}>
+                //         <a
+                //             className={
+                //                 row.original.not_playing ? "crossed" : ""
+                //             }
+                //         >
+                //             {value}
+                //         </a>
+                //     </Link>
+                // );
             },
         },
         {
@@ -76,5 +96,12 @@ export default function PlayerPoolTable({ players, index, toggleRow }) {
             id: "id",
         },
     ];
-    return <Table data={players} columns={columns} rowSelect={toggleRow} />;
+    return (
+        <Table
+            data={_.map(players, (p) => ({ ...p, rowId: p.playerId }))}
+            columns={columns}
+            rowSelect={toggleRow}
+            selectedRowIds={selectedRowIds}
+        />
+    );
 }
