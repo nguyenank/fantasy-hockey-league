@@ -3,6 +3,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import PlayerPoolTable from "../components/PlayerPoolTable";
 import InfoBlocks from "../components/InfoBlocks";
+import ModifyTeamStatus from "../components/ModifyTeamStatus";
 import BackToTop from "../components/BackToTop";
 import {
     collection,
@@ -13,7 +14,6 @@ import {
     orderBy,
 } from "firebase/firestore";
 import { default as _ } from "lodash";
-import styles from "./styles/modify-team.module.scss";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -56,6 +56,11 @@ export default function ModifyTeam({ players }) {
     const [user, loading, error] = useAuthState(auth);
     const [selected, setSelected] = useState([]);
 
+    const selectedPlayers = _.filter(
+        players,
+        (p) => _.indexOf(selected, p.playerId) !== -1
+    );
+
     function toggleRow(id) {
         if (selected.indexOf(id) === -1) {
             setSelected([...selected, id]);
@@ -82,9 +87,7 @@ export default function ModifyTeam({ players }) {
                 <div className="center">
                     <PlayerPoolTable players={players} toggleRow={toggleRow} />
                 </div>
-                <div
-                    className={styles.status}
-                >{`Selected: ${selected.length}`}</div>
+                <ModifyTeamStatus selectedPlayers={selectedPlayers} />
                 <BackToTop />
             </>
         );

@@ -1,0 +1,43 @@
+$main-header: #7ce7ff;
+$main-header-highlight: #b0eefc;
+$light-grey: #eee;
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  margin-top: 1rem;
+  padding: 0.25rem;
+  bottom: 0;
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $main-header-highlight;
+  font-weight: bold;
+}
+
+.good {
+  background-color: $main-header;
+}
+
+.bad {
+  background-color: $light-grey;
+}
+
+.bad,
+.good,
+.submit {
+  margin: 0.25rem 0.75rem;
+  padding: 0.2rem 0.4rem;
+  display: inline-block;
+}
+
+.submit {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.2rem 0.6rem;
+
+  &:hover {
+    background-color: $light-grey;
+  }
+}

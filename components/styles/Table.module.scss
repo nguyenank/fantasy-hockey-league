@@ -61,6 +61,19 @@ $light-grey: #eee;
         }
       }
     }
+
+    &.selected,
+    &.unselected {
+      cursor: pointer;
+    }
+
+    &.selected {
+      background-color: $main-header-highlight;
+
+      &:hover {
+        background-color: $main-header;
+      }
+    }
   }
 
   td {
@@ -70,10 +83,6 @@ $light-grey: #eee;
   .boldish {
     font-weight: 700;
   }
-}
-
-.rowselect {
-  cursor: pointer;
 }
 
 .overflow {

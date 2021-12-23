@@ -116,9 +116,11 @@ export default function MyTable(props) {
                                     className={
                                         row.original.not_playing
                                             ? styles.strikeout
-                                            : props.rowSelect
-                                            ? styles.rowselect
-                                            : ""
+                                            : !props.rowSelect
+                                            ? ""
+                                            : row.isSelected
+                                            ? styles.selected
+                                            : styles.unselected
                                     }
                                     onClick={() => {
                                         row.toggleRowSelected();
