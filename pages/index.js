@@ -24,12 +24,12 @@ export async function getStaticProps() {
     const teamQuery = query(
         collection(db, "leagues/phf2122/teams"),
         where("submitted", "==", true),
-        orderBy("points", "desc"),
+        orderBy("rankings.overall", "asc"),
         limit(10)
     );
     const playerQuery = query(
         collection(db, "leagues/phf2122/players"),
-        orderBy("points", "desc"),
+        orderBy("rankings.overall", "asc"),
         limit(10)
     );
 
