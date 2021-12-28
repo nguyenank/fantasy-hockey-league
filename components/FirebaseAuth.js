@@ -19,6 +19,9 @@ const uiConfig = {
         {
             provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         },
+        {
+            provider: firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        },
     ],
 };
 

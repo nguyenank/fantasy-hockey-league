@@ -1,9 +1,8 @@
 import { useTable, useSortBy, useRowSelect } from "react-table";
-import { useRef, useMemo, Component } from "react";
+import { useRef, useMemo } from "react";
 import styles from "./styles/Table.module.scss";
 
 export default function Table(props) {
-    console.log("rerender table");
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
     let tableArguments = [

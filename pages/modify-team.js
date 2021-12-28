@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { PlayerPoolTable } from "../components/PlayerPoolTable";
+import PlayerPoolTable from "../components/PlayerPoolTable";
 import InfoBlocks from "../components/InfoBlocks";
 import ModifyTeamStatus from "../components/ModifyTeamStatus";
 import BackToTop from "../components/BackToTop";
