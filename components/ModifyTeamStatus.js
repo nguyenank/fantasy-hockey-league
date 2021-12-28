@@ -1,7 +1,7 @@
 import styles from "./styles/ModifyTeamStatus.module.scss";
 import { default as _ } from "lodash";
 
-export default function ModifyTeamStatus({ selectedPlayers }) {
+export default function ModifyTeamStatus({ selectedPlayers, submitted }) {
     const posCounts =
         selectedPlayers.length === 0
             ? { F: 0, D: 0, G: 0 }
@@ -35,6 +35,11 @@ export default function ModifyTeamStatus({ selectedPlayers }) {
             text: `Fantasy Value: ${fantasyValue}/1000`,
         },
     ];
+    const validTeam = _.reduce(
+        spans,
+        (result, span) => result && span.goodCond,
+        true
+    );
     return (
         <div className={styles.status}>
             <div>
@@ -42,15 +47,16 @@ export default function ModifyTeamStatus({ selectedPlayers }) {
                     <StatusSpan {...s} />
                 ))}
             </div>
-            {_.reduce(
-                spans,
-                (result, span) => result && span.goodCond,
-                true
-            ) && (
-                <span className={styles.submit}>
-                    <a>Submit Team</a>
-                </span>
+            {!submitted && (
+                <button className={styles.submit}>Save Draft</button>
             )}
+
+            <button
+                className={validTeam ? styles.submit : styles.submit_hidden}
+                disabled={validTeam ? undefined : true}
+            >
+                Submit Team
+            </button>
         </div>
     );
 }

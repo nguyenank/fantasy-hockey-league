@@ -32,12 +32,19 @@ $light-grey: #eee;
   display: inline-block;
 }
 
-.submit {
+.submit,
+.submit_hidden {
   background-color: white;
+  border: 0;
   border-radius: 1rem;
   padding: 0.2rem 0.6rem;
+  cursor: pointer;
 
   &:hover {
     background-color: $light-grey;
   }
+}
+
+.submit_hidden {
+  visibility: hidden;
 }

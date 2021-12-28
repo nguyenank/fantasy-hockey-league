@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import PlayerPoolTable from "../components/PlayerPoolTable";
+import { PlayerPoolTable } from "../components/PlayerPoolTable";
 import InfoBlocks from "../components/InfoBlocks";
 import ModifyTeamStatus from "../components/ModifyTeamStatus";
 import BackToTop from "../components/BackToTop";
@@ -18,6 +18,7 @@ import { default as _ } from "lodash";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import styles from "./styles/modify-team.module.css";
 
 export async function getStaticProps() {
     // Call an external API endpoint to get posts
@@ -53,6 +54,10 @@ export async function getStaticProps() {
     };
 }
 
+async function saveDraftTeam(currentTeam, user) {
+    const db = getFirestore();
+}
+
 export default function ModifyTeam({ players }) {
     const auth = getAuth();
     const [user, loadingUser, errorUser] = useAuthState(auth);
@@ -63,10 +68,12 @@ export default function ModifyTeam({ players }) {
             : undefined
     );
     const [selected, setSelected] = useState(null);
+    const [teamName, setTeamName] = useState("");
 
     if (selected === null) {
         if (currentTeam) {
             setSelected(currentTeam.players);
+            setTeamName(currentTeam.teamName);
         }
     }
 
@@ -74,6 +81,15 @@ export default function ModifyTeam({ players }) {
         players,
         (p) => _.indexOf(selected, p.playerId) !== -1
     );
+
+    const originalIds = currentTeam
+        ? _.fromPairs(
+              _.map(currentTeam.players, (id) => [
+                  _.findIndex(players, ["playerId", id]),
+                  true,
+              ])
+          )
+        : [];
 
     const selectedIds = _.fromPairs(
         _.map(selected, (id) => [_.findIndex(players, ["playerId", id]), true])
@@ -89,7 +105,7 @@ export default function ModifyTeam({ players }) {
 
     let content;
     if (loadingUser || loadingTeam || selected === null) {
-        content = <div>Loading</div>;
+        content = <div>Loading...</div>;
     } else if (!user) {
         content = (
             <>
@@ -100,16 +116,42 @@ export default function ModifyTeam({ players }) {
             </>
         );
     } else {
+        const submitted = currentTeam.submitted;
         content = (
             <>
+                <label className={styles.label} htmlFor="team_name">
+                    Team Name:
+                </label>
+                <input
+                    id="team_name"
+                    name="team_name"
+                    type="text"
+                    maxLength={50}
+                    className={styles.textField}
+                    value={teamName}
+                    disabled={submitted}
+                    onChange={(e) => setTeamName(e.target.value)}
+                ></input>
+                <div>
+                    <span className={styles.label}>Status:</span>
+                    {submitted ? "Submitted" : "Unsubmitted"}
+                </div>
+
+                <div>
+                    <span className={styles.label}>Changes:</span>
+                    {submitted ? `${currentTeam.changes}/3` : "∞"}
+                </div>
                 <div className="center">
                     <PlayerPoolTable
                         players={players}
                         toggleRow={toggleRow}
-                        selectedRowIds={selectedIds}
+                        selectedRowIds={originalIds}
                     />
                 </div>
-                <ModifyTeamStatus selectedPlayers={selectedPlayers} />
+                <ModifyTeamStatus
+                    selectedPlayers={selectedPlayers}
+                    submitted={submitted}
+                />
                 <BackToTop />
             </>
         );
