@@ -117,7 +117,7 @@ export async function getStaticProps({ params }) {
         const playerQuery = query(
             collection(db, "leagues/phf2122/players"),
             where("playerId", "in", players),
-            orderBy("points", "desc")
+            orderBy("rankings.overall", "asc")
         );
 
         const playerQuerySnapshot = await getDocs(playerQuery);

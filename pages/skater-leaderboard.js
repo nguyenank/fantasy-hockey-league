@@ -25,12 +25,12 @@ export async function getStaticProps() {
             ? query(
                   collection(db, "leagues/phf2122/players"),
                   where("position", "in", ["F", "D", "F/D", "D/F"]),
-                  orderBy("points", "desc")
+                  orderBy("rankings.skater", "asc")
               )
             : query(
                   collection(db, "leagues/phf2122/players"),
                   where("position", "in", ["F", "D", "F/D", "D/F"]),
-                  orderBy("points", "desc"),
+                  orderBy("rankings.skater", "asc"),
                   limit(25)
               );
 

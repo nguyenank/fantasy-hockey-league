@@ -282,7 +282,9 @@ async function updatePlayerRankings() {
 
 async function updateTeamPointsAndRankings() {
     // get teams
-    const q = firestore.collection("leagues/phf2122/teams");
+    const q = firestore
+        .collection("leagues/phf2122/teams")
+        .where("submitted", "==", true);
     const querySnapshot = await q.get();
     let data = [];
     querySnapshot.forEach((doc) => {
@@ -316,8 +318,8 @@ async function updateTeamPointsAndRankings() {
 // addTeams("./db/data/phf_teams.json");
 
 // await updateSkaterStats(
-//     "./db/data/skater_stats-12-13-21.csv",
-//     "./db/data/goalie_stats-12-13-21.csv"
+//     "./db/data/skater_stats-12-23-21.csv",
+//     "./db/data/goalie_stats-12-23-21.csv"
 // );
 // await updatePlayerRankings();
-// await updateTeamPointsAndRankings();
+await updateTeamPointsAndRankings();

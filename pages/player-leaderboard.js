@@ -22,11 +22,11 @@ export async function getStaticProps() {
         process.env.DATA_FULL === "true"
             ? query(
                   collection(db, "leagues/phf2122/players"),
-                  orderBy("points", "desc")
+                  orderBy("rankings.overall", "asc")
               )
             : query(
                   collection(db, "leagues/phf2122/players"),
-                  orderBy("points", "desc"),
+                  orderBy("rankings.overall", "asc"),
                   limit(25)
               );
 
