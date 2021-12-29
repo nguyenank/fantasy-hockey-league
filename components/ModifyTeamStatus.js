@@ -65,7 +65,7 @@ export default function ModifyTeamStatus({
         <div className={styles.status}>
             <div>
                 {spans.map((s) => (
-                    <StatusSpan {...s} />
+                    <StatusSpan {...s} key={s.key} />
                 ))}
             </div>
             {!submitted && (
