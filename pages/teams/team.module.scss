@@ -1,3 +1,6 @@
+$main-header: #7ce7ff;
+$main-header-highlight: #b0eefc;
+
 .divider {
   height: 2rem;
 }
@@ -5,4 +8,18 @@
 .columns {
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  margin: 1rem 0;
+  background-color: $main-header;
+  border: 1px solid black;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $main-header-highlight;
+    text-shadow: 0.15em 0.15em #fff;
+  }
 }

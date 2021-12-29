@@ -53,7 +53,7 @@ export default function Header() {
                             >
                                 <span>Sign Out</span>
                             </a>
-                            <h5 className={styles.leaderboard}>Teams</h5>
+                            <h5 className={styles.leaderboard}>Your Teams</h5>
                             <Link href={`/teams/${user.uid}`}>
                                 <a className={styles.link}>
                                     <span>PHF 2021-2022</span>
@@ -62,6 +62,7 @@ export default function Header() {
                         </>
                     )}
                     <h5 className={styles.leaderboard}>Leaderboards</h5>
+                    <h6 className={styles.subleaderboard}>PHF 2021-2022</h6>
                     <Link href="/team-leaderboard">
                         <a className={styles.link}>
                             <span>Teams</span>

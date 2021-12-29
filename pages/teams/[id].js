@@ -9,10 +9,13 @@ import {
     limit,
     doc,
     getDoc,
+    setDoc,
     orderBy,
     where,
 } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SkaterTable from "../../components/SkaterTable";
 import GoalieTable from "../../components/GoalieTable";
@@ -20,9 +23,47 @@ import BackToTop from "../../components/BackToTop";
 import _ from "lodash";
 import styles from "./team.module.scss";
 
-export default function Team({ team, skaters, goalies }) {
+async function createTeam(uid) {
+    const db = getFirestore();
+    const docRef = doc(db, "leagues/phf2122/teams", uid);
+    await setDoc(docRef, {
+        userId: uid,
+        teamName: "Unnamed Team",
+        submitted: false,
+        players: [],
+        changes: 0,
+        points: 0,
+        rankings: {
+            overall: 1,
+        },
+    });
+}
+
+export default function Team({ team, skaters, goalies, userId }) {
+    const router = useRouter();
     const auth = getAuth();
     const [user, loading, error] = useAuthState(auth);
+    const [waiting, setWaiting] = useState(false);
+
+    if (!team && user && userId === user.uid) {
+        return (
+            <Layout pageHeader={"No Team"}>
+                <div>
+                    You have not submitted a team for the PHF 2021-2022 league.
+                </div>
+                <button
+                    className={styles.btn}
+                    onClick={async () => {
+                        setWaiting(true);
+                        createTeam(user.uid);
+                        router.push("/modify-team");
+                    }}
+                >
+                    {waiting ? "..." : "Create Team"}
+                </button>
+            </Layout>
+        );
+    }
 
     if (!team || (!team.submitted && user && user.uid !== team.userId)) {
         return (
@@ -119,7 +160,7 @@ export async function getStaticProps({ params }) {
 
     if (!docSnap.exists()) {
         return {
-            props: {},
+            props: { userId: params.id },
         };
     }
 

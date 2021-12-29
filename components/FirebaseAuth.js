@@ -12,30 +12,6 @@ const uiConfig = {
     // Auth providers
     // https://github.com/firebase/firebaseui-web#configure-oauth-providers
     signInSuccessUrl: "/",
-    callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            const user = authResult.user;
-            const isNewUser = authResult.additionalUserInfo.isNewUser;
-
-            if (isNewUser) {
-                const db = getFirestore();
-                const docRef = doc(db, "leagues/phf2122/teams", user.uid);
-                setDoc(docRef, {
-                    userId: user.uid,
-                    teamName: "Unnamed Team",
-                    submitted: false,
-                    players: [],
-                    changes: 0,
-                    points: 0,
-                    rankings: {
-                        overall: 1,
-                    },
-                });
-            }
-
-            return true;
-        },
-    },
     signInOptions: [
         {
             provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,

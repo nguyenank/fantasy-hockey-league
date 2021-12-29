@@ -157,12 +157,14 @@ export default function ModifyTeam({ players }) {
             selected.includes(p.playerId)
         );
 
-        const [changes, validChanges] = changesCalc(
-            currentTeam.changes,
-            currentTeam.players,
-            selected,
-            players
-        );
+        const [changes, validChanges] = submitted
+            ? changesCalc(
+                  currentTeam.changes,
+                  currentTeam.players,
+                  selected,
+                  players
+              )
+            : [0, true];
 
         function toggleRow(id) {
             if (selected.includes(id)) {
