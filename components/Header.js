@@ -23,7 +23,11 @@ export default function Header() {
                 <div className={styles.rightSide}>
                     {loginEnabled && (
                         <div className={styles.bold}>
-                            {user ? user.email : "Not Signed In"}
+                            {user
+                                ? user.email
+                                    ? user.email
+                                    : user.displayName // twitter
+                                : "Not Signed In"}
                         </div>
                     )}
 

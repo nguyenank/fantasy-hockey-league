@@ -24,54 +24,64 @@ export default function Team({ team, skaters, goalies }) {
     const auth = getAuth();
     const [user, loading, error] = useAuthState(auth);
 
-    let changesTeam = [
-        {
-            bold: "Changes: ",
-            text: `${team.changes}/3`,
-        },
-    ];
-    const changesModify =
-        user && user.uid === team.userId
-            ? [
-                  ...changesTeam,
-                  {
-                      bold: `Modify Team`,
-                      href: "/modify-team",
-                  },
-              ]
-            : changesTeam;
+    if (!team || (!team.submitted && user && user.uid !== team.userId)) {
+        return (
+            <Layout pageHeader={"Team Not Found"}>
+                <div>
+                    We could not find this team for the PHF 2021-2022 league.
+                </div>
+            </Layout>
+        );
+    }
+
+    let changesModify = [];
+    if (team.submitted) {
+        changesModify = [
+            ...changesModify,
+            {
+                bold: "Changes: ",
+                text: `${team.changes}/3`,
+            },
+        ];
+    }
+    if (user && user.uid === team.userId) {
+        changesModify = [
+            ...changesModify,
+            {
+                bold: `Modify Team`,
+                href: "/modify-team",
+            },
+        ];
+    }
 
     return (
-        <Layout pageHeader={team ? team.teamName : "Team Not Found"}>
-            {team ? (
-                <>
-                    <div className={styles.columns}>
-                        <InfoBlocks
-                            info={[
-                                {
-                                    bold: "Rank:",
-                                    text: ` ${team.rankings.overall}/58`,
-                                    href: "/team-leaderboard",
-                                },
-                                {
-                                    bold: "Points: ",
-                                    text: `${team.points.toFixed(2)}`,
-                                },
-                            ]}
-                        />
-                        <InfoBlocks info={changesModify} />
-                    </div>
-                    <SkaterTable players={skaters} team={true} />
-                    <div className={styles.divider}></div>
-                    <GoalieTable players={goalies} team={true} />
-                    <BackToTop />
-                </>
-            ) : (
-                <div>
-                    We could not find a team linked with this account for this
-                    PHF 2021-2022 league.
+        <Layout
+            pageHeader={`${team.submitted ? "" : "[UNSUBMITTED] "}${
+                team.teamName
+            }`}
+        >
+            <>
+                <div className={styles.columns}>
+                    <InfoBlocks
+                        info={[
+                            {
+                                bold: "Rank:",
+                                text: ` ${team.rankings.overall}/58`,
+                                href: "/team-leaderboard",
+                            },
+                            {
+                                bold: "Points: ",
+                                text: `${team.points.toFixed(2)}`,
+                            },
+                        ]}
+                    />
+                    <InfoBlocks info={changesModify} />
                 </div>
-            )}
+                <SkaterTable players={skaters} team={true} />
+                <div className={styles.divider}></div>
+                <GoalieTable players={goalies} team={true} />
+                <BackToTop />
+            </>
         </Layout>
     );
 }
@@ -108,25 +118,30 @@ export async function getStaticProps({ params }) {
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {
-        return { props: {} };
+        return {
+            props: {},
+        };
     }
 
     const data = docSnap.data();
+
     let skaters = [];
     // need to split up skaters because can do max 10 at a time
     for (const players of [data.players.slice(0, 6), data.players.slice(6)]) {
-        const playerQuery = query(
-            collection(db, "leagues/phf2122/players"),
-            where("playerId", "in", players),
-            orderBy("rankings.overall", "asc")
-        );
+        if (players.length > 0) {
+            const playerQuery = query(
+                collection(db, "leagues/phf2122/players"),
+                where("playerId", "in", players),
+                orderBy("rankings.overall", "asc")
+            );
 
-        const playerQuerySnapshot = await getDocs(playerQuery);
-        playerQuerySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            const data = doc.data();
-            skaters.push(data);
-        });
+            const playerQuerySnapshot = await getDocs(playerQuery);
+            playerQuerySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                const data = doc.data();
+                skaters.push(data);
+            });
+        }
     }
 
     const np_skaters = _.remove(skaters, "not_playing");
