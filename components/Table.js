@@ -157,16 +157,6 @@ export default function Table(props) {
 
                                                   const desc =
                                                       selectCol.isSortedDesc;
-
-                                                  if (selectCol.isSorted) {
-                                                      console.log("hit");
-
-                                                      // toggleSortBy(
-                                                      //     "selection",
-                                                      //     true,
-                                                      //     false
-                                                      // );
-                                                  }
                                               }
                                             : undefined
                                     }

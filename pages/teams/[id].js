@@ -26,17 +26,23 @@ import styles from "./team.module.scss";
 async function createTeam(uid) {
     const db = getFirestore();
     const docRef = doc(db, "leagues/phf2122/teams", uid);
-    await setDoc(docRef, {
-        userId: uid,
-        teamName: "Unnamed Team",
-        submitted: false,
-        players: [],
-        changes: 0,
-        points: 0,
-        rankings: {
-            overall: 1,
-        },
-    });
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        // do not regenerate team if already exists
+        return;
+    } else {
+        await setDoc(docRef, {
+            userId: uid,
+            teamName: "Unnamed Team",
+            submitted: false,
+            players: [],
+            changes: 0,
+            points: 0,
+            rankings: {
+                overall: 1,
+            },
+        });
+    }
 }
 
 export default function Team({ team, skaters, goalies, userId }) {
@@ -161,6 +167,7 @@ export async function getStaticProps({ params }) {
     if (!docSnap.exists()) {
         return {
             props: { userId: params.id },
+            revalidate: 20,
         };
     }
 
