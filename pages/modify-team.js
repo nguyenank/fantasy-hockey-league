@@ -73,6 +73,43 @@ async function submitTeam(userId, teamName, players, changes) {
     });
 }
 
+function changesCalc(originalChanges, original, selected, players) {
+    const originalSet = new Set(original);
+    const selectedSet = new Set(selected);
+    const originalDiff = new Set(
+        [...originalSet].filter((x) => !selectedSet.has(x))
+    );
+    const selectedDiff = new Set(
+        [...selectedSet].filter((x) => !originalSet.has(x))
+    );
+    const changes =
+        originalChanges + _.max([originalDiff.size, selectedDiff.size]);
+
+    const originalDiffPlayers = _.map([...originalDiff], (id) =>
+        _.find(players, ["playerId", id])
+    );
+
+    const selectedDiffPlayers = _.orderBy(
+        _.map([...selectedDiff], (id) => _.find(players, ["playerId", id])),
+        ["fantasy_value"],
+        ["desc"]
+    );
+
+    let valid = true;
+    _.forEach(originalDiffPlayers, (p) => {
+        const result = _.find(selectedDiffPlayers, (p2) => {
+            return p.team === p2.team && p2.fantasy_value <= p.fantasy_value;
+        });
+        if (result) {
+            _.pull(selectedDiffPlayers, result);
+        } else {
+            valid = false;
+        }
+    });
+
+    return [changes, valid];
+}
+
 export default function ModifyTeam({ players }) {
     const router = useRouter();
     const auth = getAuth();
@@ -109,31 +146,29 @@ export default function ModifyTeam({ players }) {
     } else {
         const submitted = currentTeam.submitted;
 
-        const originalIds = _.fromPairs(
+        const originalIndexes = _.fromPairs(
             _.map(currentTeam.players, (id) => [
                 _.findIndex(players, ["playerId", id]),
                 true,
             ])
         );
 
-        const selectedPlayers = _.filter(
-            players,
-            (p) => _.indexOf(selected, p.playerId) !== -1
+        const selectedPlayers = _.filter(players, (p) =>
+            selected.includes(p.playerId)
         );
 
-        const changes = submitted
-            ? currentTeam.changes +
-              _.max(
-                  _.difference(originalIds, selected).length,
-                  _.difference(selected, originalIds).length
-              )
-            : 0;
+        const [changes, validChanges] = changesCalc(
+            currentTeam.changes,
+            currentTeam.players,
+            selected,
+            players
+        );
 
         function toggleRow(id) {
-            if (selected.indexOf(id) === -1) {
-                setSelected([...selected, id]);
-            } else {
+            if (selected.includes(id)) {
                 setSelected(_.without(selected, id));
+            } else {
+                setSelected([...selected, id]);
             }
         }
 
@@ -156,21 +191,17 @@ export default function ModifyTeam({ players }) {
                     <span className={styles.label}>Status:</span>
                     {submitted ? "Submitted" : "Unsubmitted"}
                 </div>
-
-                <div>
-                    <span className={styles.label}>Changes:</span>
-                    {submitted ? `${currentTeam.changes}/3` : "∞"}
-                </div>
                 <div className="center">
                     <PlayerPoolTable
                         players={players}
                         toggleRow={toggleRow}
-                        originalIds={originalIds}
+                        originalIndexes={originalIndexes}
                         selectedRowIds={selected}
                     />
                 </div>
                 <ModifyTeamStatus
                     changes={changes}
+                    validChanges={validChanges}
                     selectedPlayers={selectedPlayers}
                     submitted={submitted}
                     waiting={waiting}

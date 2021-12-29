@@ -3,6 +3,7 @@ import { default as _ } from "lodash";
 
 export default function ModifyTeamStatus({
     changes,
+    validChanges,
     selectedPlayers,
     submitted,
     saveDraftTeam,
@@ -47,8 +48,10 @@ export default function ModifyTeamStatus({
             ...spans,
             {
                 key: "changes",
-                goodCond: changes <= 3,
-                text: `Changes: ${changes}/3`,
+                goodCond: changes <= 3 && validChanges,
+                text: `Changes: ${changes}/3 ${
+                    validChanges ? "" : "(invalid)"
+                }`,
             },
         ];
     }

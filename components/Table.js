@@ -3,11 +3,10 @@ import { useRef, useMemo } from "react";
 import styles from "./styles/Table.module.scss";
 
 export default function Table(props) {
-    console.log("rerender");
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
-    const selectedRowIds = useMemo(() => props.selectedRowIds, [
-        props.selectedRowIds,
+    const originalIndexes = useMemo(() => props.originalIndexes, [
+        props.originalIndexes,
     ]);
     let tableArguments = [
         {
@@ -24,7 +23,7 @@ export default function Table(props) {
                 data,
                 initialState: {
                     hiddenColumns: ["id", "not_playing"],
-                    selectedRowIds: selectedRowIds,
+                    selectedRowIds: originalIndexes,
                 },
                 autoResetSelectedRows: false,
                 autoResetSortBy: false,
