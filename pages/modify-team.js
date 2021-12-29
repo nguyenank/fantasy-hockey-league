@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import PlayerPoolTable from "../components/PlayerPoolTable";
@@ -13,6 +14,7 @@ import {
     limit,
     orderBy,
     doc,
+    updateDoc,
 } from "firebase/firestore";
 import { default as _ } from "lodash";
 import { getAuth, signOut } from "firebase/auth";
@@ -54,11 +56,25 @@ export async function getStaticProps() {
     };
 }
 
-async function saveDraftTeam(currentTeam, user) {
+async function saveDraftTeam(userId, teamName, players) {
     const db = getFirestore();
+    const docRef = doc(db, "leagues/phf2122/teams", userId);
+    await updateDoc(docRef, { teamName: teamName, players: players });
+}
+
+async function submitTeam(userId, teamName, players, changes) {
+    const db = getFirestore();
+    const docRef = doc(db, "leagues/phf2122/teams", userId);
+    await updateDoc(docRef, {
+        submitted: true,
+        teamName: teamName,
+        players: players,
+        changes: changes,
+    });
 }
 
 export default function ModifyTeam({ players }) {
+    const router = useRouter();
     const auth = getAuth();
     const [user, loadingUser, errorUser] = useAuthState(auth);
 
@@ -69,37 +85,12 @@ export default function ModifyTeam({ players }) {
     );
     const [selected, setSelected] = useState(null);
     const [teamName, setTeamName] = useState("");
+    const [waiting, setWaiting] = useState(false);
 
     if (selected === null) {
         if (currentTeam) {
             setSelected(currentTeam.players);
             setTeamName(currentTeam.teamName);
-        }
-    }
-
-    const selectedPlayers = _.filter(
-        players,
-        (p) => _.indexOf(selected, p.playerId) !== -1
-    );
-
-    const originalIds = currentTeam
-        ? _.fromPairs(
-              _.map(currentTeam.players, (id) => [
-                  _.findIndex(players, ["playerId", id]),
-                  true,
-              ])
-          )
-        : [];
-
-    const selectedIds = _.fromPairs(
-        _.map(selected, (id) => [_.findIndex(players, ["playerId", id]), true])
-    );
-
-    function toggleRow(id) {
-        if (selected.indexOf(id) === -1) {
-            setSelected([...selected, id]);
-        } else {
-            setSelected(_.without(selected, id));
         }
     }
 
@@ -117,6 +108,35 @@ export default function ModifyTeam({ players }) {
         );
     } else {
         const submitted = currentTeam.submitted;
+
+        const originalIds = _.fromPairs(
+            _.map(currentTeam.players, (id) => [
+                _.findIndex(players, ["playerId", id]),
+                true,
+            ])
+        );
+
+        const selectedPlayers = _.filter(
+            players,
+            (p) => _.indexOf(selected, p.playerId) !== -1
+        );
+
+        const changes = submitted
+            ? currentTeam.changes +
+              _.max(
+                  _.difference(originalIds, selected).length,
+                  _.difference(selected, originalIds).length
+              )
+            : 0;
+
+        function toggleRow(id) {
+            if (selected.indexOf(id) === -1) {
+                setSelected([...selected, id]);
+            } else {
+                setSelected(_.without(selected, id));
+            }
+        }
+
         content = (
             <>
                 <label className={styles.label} htmlFor="team_name">
@@ -145,12 +165,25 @@ export default function ModifyTeam({ players }) {
                     <PlayerPoolTable
                         players={players}
                         toggleRow={toggleRow}
-                        selectedRowIds={originalIds}
+                        originalIds={originalIds}
+                        selectedRowIds={selected}
                     />
                 </div>
                 <ModifyTeamStatus
+                    changes={changes}
                     selectedPlayers={selectedPlayers}
                     submitted={submitted}
+                    waiting={waiting}
+                    saveDraftTeam={async () => {
+                        setWaiting(true);
+                        await saveDraftTeam(user.uid, teamName, selected);
+                        router.push("/teams/" + user.uid);
+                    }}
+                    submitTeam={async () => {
+                        setWaiting(true);
+                        await submitTeam(user.uid, teamName, selected, changes);
+                        router.push("/teams/" + user.uid);
+                    }}
                 />
                 <BackToTop />
             </>

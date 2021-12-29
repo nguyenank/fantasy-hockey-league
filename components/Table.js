@@ -3,8 +3,12 @@ import { useRef, useMemo } from "react";
 import styles from "./styles/Table.module.scss";
 
 export default function Table(props) {
+    console.log("rerender");
     const data = useMemo(() => props.data, [props.data]);
     const columns = useMemo(() => props.columns, [props.columns]);
+    const selectedRowIds = useMemo(() => props.selectedRowIds, [
+        props.selectedRowIds,
+    ]);
     let tableArguments = [
         {
             columns,
@@ -20,9 +24,10 @@ export default function Table(props) {
                 data,
                 initialState: {
                     hiddenColumns: ["id", "not_playing"],
-                    selectedRowIds: props.selectedRowIds,
+                    selectedRowIds: selectedRowIds,
                 },
                 autoResetSelectedRows: false,
+                autoResetSortBy: false,
             },
             useSortBy,
             useRowSelect,
@@ -36,6 +41,7 @@ export default function Table(props) {
         headerGroups,
         rows,
         prepareRow,
+        toggleSortBy,
     } = tableInstance;
     return (
         <div className={styles.overflow}>
@@ -147,6 +153,21 @@ export default function Table(props) {
                                                   props.rowSelect(
                                                       row.original.playerId
                                                   );
+                                                  const selectCol =
+                                                      row.cells[0].column;
+
+                                                  const desc =
+                                                      selectCol.isSortedDesc;
+
+                                                  if (selectCol.isSorted) {
+                                                      console.log("hit");
+
+                                                      // toggleSortBy(
+                                                      //     "selection",
+                                                      //     true,
+                                                      //     false
+                                                      // );
+                                                  }
                                               }
                                             : undefined
                                     }

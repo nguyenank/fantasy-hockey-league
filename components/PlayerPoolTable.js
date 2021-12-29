@@ -9,9 +9,8 @@ export default function PlayerPoolTable(props) {
         [props.players]
     );
     const toggleRow = useMemo(() => props.toggleRow, [props.toggleRow]);
-    const selectedRowIds = useMemo(() => props.selectedRowIds, [
-        props.selectedRowIds,
-    ]);
+    const originalIds = useMemo(() => props.originalIds, [props.originalIds]);
+
     const columns = [
         {
             id: "selection",
@@ -27,9 +26,13 @@ export default function PlayerPoolTable(props) {
             ),
             canSort: true,
             sortType: (rowA, rowB) => {
-                if (rowA.isSelected === rowB.isSelected) {
-                    return 0;
-                } else if (rowA.isSelected) {
+                const selectedA =
+                    props.selectedRowIds.indexOf(rowA.original.playerId) !== -1;
+                const selectedB =
+                    props.selectedRowIds.indexOf(rowB.original.playerId) !== -1;
+                if (selectedA === selectedB) {
+                    return 1;
+                } else if (selectedA) {
                     return -1;
                 } else {
                     return 1;
@@ -105,7 +108,7 @@ export default function PlayerPoolTable(props) {
             data={players}
             columns={columns}
             rowSelect={toggleRow}
-            selectedRowIds={selectedRowIds}
+            selectedRowIds={originalIds}
         />
     );
 }

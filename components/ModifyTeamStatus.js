@@ -1,14 +1,21 @@
 import styles from "./styles/ModifyTeamStatus.module.scss";
 import { default as _ } from "lodash";
 
-export default function ModifyTeamStatus({ selectedPlayers, submitted }) {
+export default function ModifyTeamStatus({
+    changes,
+    selectedPlayers,
+    submitted,
+    saveDraftTeam,
+    submitTeam,
+    waiting,
+}) {
     const posCounts =
         selectedPlayers.length === 0
             ? { F: 0, D: 0, G: 0 }
             : _.countBy(selectedPlayers, "position");
     const teamCount = _.uniqBy(selectedPlayers, "team").length;
     const fantasyValue = _.sumBy(selectedPlayers, "fantasy_value");
-    const spans = [
+    let spans = [
         {
             key: "forwards",
             goodCond: posCounts.F === 6,
@@ -35,6 +42,17 @@ export default function ModifyTeamStatus({ selectedPlayers, submitted }) {
             text: `Fantasy Value: ${fantasyValue}/1000`,
         },
     ];
+    if (submitted) {
+        spans = [
+            ...spans,
+            {
+                key: "changes",
+                goodCond: changes <= 3,
+                text: `Changes: ${changes}/3`,
+            },
+        ];
+    }
+
     const validTeam = _.reduce(
         spans,
         (result, span) => result && span.goodCond,
@@ -48,14 +66,17 @@ export default function ModifyTeamStatus({ selectedPlayers, submitted }) {
                 ))}
             </div>
             {!submitted && (
-                <button className={styles.submit}>Save Draft</button>
+                <button className={styles.submit} onClick={saveDraftTeam}>
+                    {waiting ? "..." : "Save Draft"}
+                </button>
             )}
 
             <button
                 className={validTeam ? styles.submit : styles.submit_hidden}
+                onClick={submitTeam}
                 disabled={validTeam ? undefined : true}
             >
-                Submit Team
+                {waiting ? "..." : "Submit Team"}
             </button>
         </div>
     );

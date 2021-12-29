@@ -101,6 +101,7 @@ export async function getStaticPaths() {
 
     return { paths: teams, fallback: true };
 }
+
 export async function getStaticProps({ params }) {
     const db = getFirestore();
     const docRef = doc(db, "leagues/phf2122/teams", params.id);
@@ -152,5 +153,6 @@ export async function getStaticProps({ params }) {
             goalies: [...goalies, ...np_goalies],
             team: data,
         },
+        revalidate: 20,
     };
 }
