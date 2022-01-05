@@ -84,18 +84,20 @@ export async function getStaticProps({ params }) {
     let skaters = [];
     // need to split up skaters because can do max 10 at a time
     for (const players of [data.players.slice(0, 6), data.players.slice(6)]) {
-        const playerQuery = query(
-            collection(db, "leagues/phf2122/players"),
-            where("playerId", "in", players),
-            orderBy("rankings.overall", "asc")
-        );
+        if (players.length > 0) {
+            const playerQuery = query(
+                collection(db, "leagues/phf2122/players"),
+                where("playerId", "in", players),
+                orderBy("rankings.overall", "asc")
+            );
 
-        const playerQuerySnapshot = await getDocs(playerQuery);
-        playerQuerySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            const data = doc.data();
-            skaters.push(data);
-        });
+            const playerQuerySnapshot = await getDocs(playerQuery);
+            playerQuerySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                const data = doc.data();
+                skaters.push(data);
+            });
+        }
     }
 
     const np_skaters = _.remove(skaters, "not_playing");
