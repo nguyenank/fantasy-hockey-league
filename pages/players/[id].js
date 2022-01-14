@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import IndividualTable from "../../components/IndividualTable";
-import StatBlocks from "../../components/StatBlocks";
+import InfoBlocks from "../../components/InfoBlocks";
 import {
     collection,
     query,
@@ -28,7 +28,7 @@ export default function Player({ player }) {
     return (
         <Layout
             pageHeader={player ? player.name : "Player Not Found"}
-            crossOut={true}
+            crossOut={player.not_playing}
         >
             {!player ? (
                 <div>
@@ -46,22 +46,27 @@ export default function Player({ player }) {
                             <br />
                         </>
                     )}
-                    <StatBlocks
-                        stats={[
+                    <InfoBlocks
+                        info={[
                             {
-                                text: `Rank (Overall): ${player.rankings.overall}/131`,
+                                bold: "Rank (Overall): ",
+                                text: `${player.rankings.overall}/133`,
                                 href: "/player-leaderboard",
                             },
+                            skater
+                                ? {
+                                      bold: "Rank (Skaters): ",
+                                      text: `${player.rankings.skater}/117`,
+                                      href: "/skater-leaderboard",
+                                  }
+                                : {
+                                      bold: "Rank (Goalies): ",
+                                      text: `${player.rankings.goalie}/16`,
+                                      href: "/goalie-leaderboard",
+                                  },
                             {
-                                text: skater
-                                    ? `Rank (Skaters): ${player.rankings.skater}/115`
-                                    : `Rank (Goalies): ${player.rankings.goalie}/16`,
-                                href: skater
-                                    ? "/skater-leaderboard"
-                                    : "/goalie-leaderboard",
-                            },
-                            {
-                                text: `Points: ${player.points.toFixed(2)}`,
+                                bold: "Points: ",
+                                text: `${player.points.toFixed(2)}`,
                             },
                         ]}
                     />
