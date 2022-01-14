@@ -4,6 +4,10 @@
   min-height: 100vh;
 }
 
+.crossOut {
+  text-decoration: line-through;
+}
+
 .content {
   flex-grow: 1;
   padding: 2rem 4rem;

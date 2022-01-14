@@ -36,8 +36,6 @@ export async function getStaticProps() {
         players.push(doc.data());
     });
 
-    const np_players = _.remove(players, "not_playing");
-
     players = _.map(players, (player, index) => ({
         ...player,
         gp: player.stats.gp,
@@ -48,7 +46,6 @@ export async function getStaticProps() {
     return {
         props: {
             players,
-            np_players,
         },
     };
 }
@@ -57,7 +54,7 @@ export default function Demo({ players, np_players }) {
     return (
         <Layout pageHeader={"Player Leaderboard"}>
             <div className="center">
-                <PlayerTable players={[...players, ...np_players]} />
+                <PlayerTable players={players} />
             </div>
             <BackToTop />
         </Layout>

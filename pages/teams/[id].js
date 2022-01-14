@@ -100,9 +100,7 @@ export async function getStaticProps({ params }) {
         }
     }
 
-    const np_skaters = _.remove(skaters, "not_playing");
     let goalies = _.remove(skaters, (s) => s.position === "G");
-    const np_goalies = _.remove(goalies, "not_playing");
 
     skaters = _.map(_.orderBy(skaters, ["points"], "desc"), (player) => ({
         ...player,
@@ -120,8 +118,8 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            skaters: [...skaters, ...np_skaters],
-            goalies: [...goalies, ...np_goalies],
+            skaters: skaters,
+            goalies: goalies,
             team: data,
         },
     };

@@ -259,7 +259,7 @@ async function updatePlayerRankings() {
         // doc.data() is never undefined for query doc snapshots
         skaters.push(doc.data());
     });
-    skaters = _.filter(skaters, (s) => !s.not_playing);
+    // skaters = _.filter(skaters, (s) => !s.not_playing);
     // calculate rankings for position and overall
     let goalies = _.remove(skaters, (p) => p.position === "G");
     skaters = _.map(skaters, (s, i) => ({ ...s, rankings: { skater: i + 1 } }));
@@ -321,5 +321,5 @@ async function updateTeamPointsAndRankings() {
 //     "./db/data/skater_stats-01-04-21.csv",
 //     "./db/data/goalie_stats-12-23-21.csv"
 // );
-// await updatePlayerRankings();
-// await updateTeamPointsAndRankings();
+await updatePlayerRankings();
+await updateTeamPointsAndRankings();

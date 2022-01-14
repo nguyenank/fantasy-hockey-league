@@ -15,7 +15,9 @@ export default function Layout(props) {
             </Head>
             <Header />
             <div className={styles.content}>
-                <h3>{props.pageHeader}</h3>
+                <h3 className={props.crossOut ? styles.crossOut : ""}>
+                    {props.pageHeader}
+                </h3>
                 {props.children}
             </div>
             <Footer />

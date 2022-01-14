@@ -26,16 +26,26 @@ export default function Player({ player }) {
     };
     const skater = player ? player.position !== "G" : false;
     return (
-        <Layout pageHeader={player ? player.name : "Player Not Found"}>
+        <Layout
+            pageHeader={player ? player.name : "Player Not Found"}
+            crossOut={true}
+        >
             {!player ? (
                 <div>
                     Something went wrong! No player matching this ID could be
                     found.
                 </div>
-            ) : player.not_playing ? (
-                <div>This player is not playing this season.</div>
             ) : (
                 <>
+                    {player.not_playing && (
+                        <>
+                            <div className={styles.bolder}>
+                                This player is no longer playing in the PHF this
+                                season.
+                            </div>
+                            <br />
+                        </>
+                    )}
                     <StatBlocks
                         stats={[
                             {
