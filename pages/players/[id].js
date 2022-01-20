@@ -28,7 +28,7 @@ export default function Player({ player }) {
     return (
         <Layout
             pageHeader={player ? player.name : "Player Not Found"}
-            crossOut={player.not_playing}
+            crossOut={player ? player.not_playing : false}
         >
             {!player ? (
                 <div>
