@@ -50,18 +50,18 @@ export default function Player({ player }) {
                         info={[
                             {
                                 bold: "Rank (Overall): ",
-                                text: `${player.rankings.overall}/141`,
+                                text: `${player.rankings.overall}/146`,
                                 href: "/player-leaderboard",
                             },
                             skater
                                 ? {
                                       bold: "Rank (Skaters): ",
-                                      text: `${player.rankings.skater}/124`,
+                                      text: `${player.rankings.skater}/128`,
                                       href: "/skater-leaderboard",
                                   }
                                 : {
                                       bold: "Rank (Goalies): ",
-                                      text: `${player.rankings.goalie}/17`,
+                                      text: `${player.rankings.goalie}/18`,
                                       href: "/goalie-leaderboard",
                                   },
                             {

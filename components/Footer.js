@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <div className={styles.footer}>
             <hr className={styles.hr} />
-            <p>Last updated March 2, 2022.</p>
+            <p>Last updated March 16, 2022.</p>
             <p>
                 This site was created by{" "}
                 <a href="https://twitter.com/nguyenank_">An Nguyen</a> using
